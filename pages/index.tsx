@@ -1,26 +1,22 @@
 import type { NextPage } from 'next'
-import { getAllFilesMetadata } from '../lib/mdx'
-import Link from 'next/link'
-import styles from '../styles/Home.style'
+import { getAllFilesMetadata } from 'lib/mdx'
+import { PostData } from 'types'
+import Articles from 'components/Articles'
+import Nav from 'components/Nav'
+import Header from 'components/Header'
 
-const Home: NextPage = ({ posts } : any) => {
-  console.log(posts)
+const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
   return (
     <>
-    <h1>askdfhjlasdjfk</h1>
-      {posts.map((post: any) => {
-        return (
-          <Link key={post.slug} href={post.slug}><a>POST</a></Link>
-        )
-      })}
-
-      <style jsx>{styles}</style>
+      <Nav />
+      <Header />
+      <Articles posts={posts} />
     </>
   )
 }
 
 export async function getStaticProps () {
-  const posts = getAllFilesMetadata()
+  const posts = await getAllFilesMetadata()
   return {
     props: { posts }
   }
