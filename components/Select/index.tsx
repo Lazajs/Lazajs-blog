@@ -1,29 +1,27 @@
 import { fonts, colors } from 'constants/default'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 
 type Props = {
   values: string[]
-  set: Dispatch<SetStateAction<unknown>>
+  setState: Dispatch<SetStateAction<string>>
+  name: string
 }
 
-export default function Select ({ values, set }: Props) {
+export default function Select ({ values, setState, name }: Props) {
   const [isActive, setActive] = useState(false)
-  const [selected, setSelected] = useState(values[0])
-
-  useEffect(() => {
-    set(selected)
-  }, [selected, set])
+  const [selected, setSelected] = useState<string>(values[0])
 
   const handleSelect = (e: React.SyntheticEvent) => {
-    const target = e.target as HTMLParagraphElement
-
-    setSelected(target.textContent || selected)
+    const el = e.target as HTMLParagraphElement
+    const text = el.textContent
+    setState(text!)
+    setSelected(text!)
   }
 
   return (
     <>
       <span className='holder' onClick={() => setActive(!isActive)}>
-        <p>{selected}</p>
+        <b>{selected || values[0]}</b>
         {
           isActive
             ? values.map((value: string) => {
@@ -36,24 +34,32 @@ export default function Select ({ values, set }: Props) {
 
       <style jsx>{`
        .holder {
-          margin-right: 1rem;
           width: 8rem;
           background-color: ${colors.secondary};
           color: ${colors.text};
           text-align: center; 
-          font-family: ${fonts.secondary};
+          font-family: ${fonts.primary};
           flex-direction: column;
           height: fit-content;
+          z-index: 10;
+          border: .5px solid ${colors.border};
+        }
+     
+        .holder:first-child {
+          margin-right: 1rem;
         }
 
-        p {
+        p, b {
+          display: block;
+          font-weight: 500;
+          font-size: 1.5rem;
           padding: 1rem;
           cursor: pointer;
           user-select: none;
         }
 
         .option:hover {
-          background-color: ${colors.hover}
+          background-color: ${colors.hover};
         }
       `}</style>
       </>

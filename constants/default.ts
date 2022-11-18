@@ -3,8 +3,8 @@ export const colors = {
   secondary: '#353C45',
   text: '#FAFAFA',
   subText: '#FFFFFFAA',
-  hover: '#1e2329'
-
+  hover: '#1e2329',
+  border: '#FFFFFF11'
 }
 
 export const fonts = {
@@ -15,4 +15,9 @@ export const fonts = {
 export const languages = {
   ES: 'ES',
   EN: 'EN'
+}
+
+export const FILTERS = {
+  NEW: 'Newest',
+  OLD: 'Older'
 }

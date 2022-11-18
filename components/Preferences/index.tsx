@@ -1,15 +1,14 @@
 import { ReactNode } from 'react'
-import { languages, colors, fonts } from 'constants/default'
+import { colors, fonts } from 'constants/default'
 
 interface Props {
   children: ReactNode
-  lang: string
 }
 
-export default function Preferences ({ children, lang }: Props) {
+export default function Preferences ({ children }: Props) {
   return (
       <div>
-        <h2>{lang === languages.ES ? 'Artículos' : 'Articles'}</h2>
+        <h2>Artículos</h2>
         <span>
           {children}
         </span>
@@ -30,6 +29,8 @@ export default function Preferences ({ children, lang }: Props) {
           h2 {
             font-family: ${fonts.primary};
             color: ${colors.text};
+            text-decoration: underline 1px;
+            font-weight: 600;
           }
         `}</style>
       </div>

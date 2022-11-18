@@ -18,7 +18,7 @@ export default function Header () {
           flex-direction: column;
           align-items: center;
           height: 40vh;
-          justify-content: space-between;
+          justify-content: space-around;
         }
 
         span {

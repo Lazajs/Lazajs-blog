@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { colors } from 'constants/default'
 
 type Props = {children : ReactNode}
 
@@ -8,13 +7,13 @@ export default function AppLayout ({ children }: Props) {
     <main>
 
       {children}
-
       <style jsx>{`
         main {
-          padding: 1.2rem;
-          background-color: ${colors.primary};
-          width: 100vw;
-          height: 100vh;
+          padding: 1.3rem;
+          max-width: 80rem;
+          margin: auto;
+          height: max-content;
+          min-height: 100vh;
         }
       `}</style>
     </main>

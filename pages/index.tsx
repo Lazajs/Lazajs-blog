@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import { getAllFilesMetadata } from 'lib/mdx'
 import { PostData } from 'types'
 import Articles from 'components/Articles'
-import Nav from 'components/Nav'
 import Header from 'components/Header'
+import Nav from 'components/Nav'
 
 const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
 }
 
 export async function getStaticProps () {
-  const posts = await getAllFilesMetadata()
+  const posts = getAllFilesMetadata()
   return {
     props: { posts }
   }
