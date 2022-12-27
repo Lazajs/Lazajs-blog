@@ -10,10 +10,10 @@ export default function Nav () {
     <nav>
       <ul>
         <Link href={'/'}>
-          <a className='blog'><li>Blog</li></a>
+          <li>Blog</li>
         </Link>
         <Link href={'/lazaro'}>
-          <a className='lazaro'><li>Lazaro</li></a>
+          <li>Lazaro</li>
         </Link>
       </ul>
       <style jsx>{`

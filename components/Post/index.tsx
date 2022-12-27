@@ -21,13 +21,11 @@ export default function Post ({ data }: Props) {
   return (
     <>
       <Link href={slug}>
-        <a>
           <article>
             <Category type={category} />
             <small>{shownDate}</small>
             <p>{title}</p>
           </article>
-        </a>
       </Link>
 
       <style jsx>{style}</style>
