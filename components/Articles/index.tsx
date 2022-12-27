@@ -15,7 +15,7 @@ export default function Articles ({ posts }: Props) {
   useEffect(() => {
     sorter(filter)
   }, [filter, sorter])
-
+  console.log(posts)
   return (
     <section>
       <Preferences>

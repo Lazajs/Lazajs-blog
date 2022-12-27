@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type Categories = 'javascript' | 'typescript' | 'nextjs' | 'git' | 'other'
 
 export interface PostData {
@@ -14,3 +16,5 @@ export interface SVGProps {
 }
 
 export type Options = string[]
+
+export type Children = {children?: ReactNode}

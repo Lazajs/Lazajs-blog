@@ -1,10 +1,13 @@
+import PostNav from 'components/PostNav'
 import { getFileBySlug, getFiles } from 'lib/mdx'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { PostData } from 'types'
+import style from 'pages/[slug]/styles/index'
+import MDXComponents from 'components/MDXComponents'
 
 interface PostMetadata {
   source: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>>,
-  frontMatter: string
+  frontMatter: PostData
 }
 
 type StaticProps = {
@@ -13,7 +16,13 @@ type StaticProps = {
 
 export default function Post ({ source, frontMatter }: PostMetadata) {
   return (
-    <MDXRemote {...source} />
+    <>
+    <PostNav data={frontMatter} />
+    <article>
+      <MDXRemote {...source} components={MDXComponents} />
+      <style jsx>{style}</style>
+    </article>
+    </>
   )
 }
 
