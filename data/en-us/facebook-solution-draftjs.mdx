@@ -1,0 +1,83 @@
+---
+title: "Facebook's solution: DraftJS"
+description: 'How were the Facebook comments created?'
+date: '2023-01-24'
+category: 'react'
+id: 001
+traduction: 'Agustina Godoy'
+---
+
+When writing a Facebook comment a world full of options opens up containing mentions, images, emojis, polls and more. However, this was not always the case. Years prior 2014 Facebook could only accept plane text and mentions as input in its comments, this was due to the way developers treated the interface.
+
+This method resulted in a bad user experience due to the amount of bugs and bad appeareance it had when the user included mentions. It worked by generating new DOM elements with each user action witihin **textarea** manipulated by the user. For example, creating a **div** tag by pressing **enter** which in turn wrapped another **p** tag containing a **style** attribute due to a mention
+
+
+<ExampleImage height={120} width={320} src={'/assets/posts/001/pre2014.png'} alt={'Old mentions'} />
+
+## How to get better
+
+In order to improve texte entries, they had several options:
+
+- Use elements **textarea** with **div** and more (already in use)
+- Generate the content manually, i.e try to “guess” user´s actions. This caused trouble because it was necessary to create a fake cursor text, who anticipated where it should be
+- Using global attribute contentEditable
+
+The last option was chosen, contentEditable attribute specifies whether the content of an element is editable or not by the user. If so, the browser modifies its widget to allow editing and the browser will create the neccesary elements within the edited content to shape it.
+
+contentEditable provided out-of-the-box, such as native cursos positioning, native events, any available rich texts needs, automatic element growth, etc. Nevertheless is thas it´s disadvantages such as bad reputation and rejection from the community due to it’s unpredictable performance between different browsers.
+
+## React & contentEditable
+
+Facebook’s challenge was making contentEditable compatible with React, in order to make that happen it had to stop working as it did by default, where the state of the element was always bound to DOM - in contrast to Reacts’ philosphy, where we want state changes to be the ones that cause the corresponding renderings in the DOM -. To avoid this, they started with basics: **e.preventDefault()**.
+
+These were the guidelines to create a controlled contentEditable
+
+- Strict control over the state of the content (React).
+- Strict control over the cursor (Native Selection API)
+- Declarative and understandable API
+- Be able to perform all the actions expected from a rich text editor (copy/paste/cut/spellcheck).
+
+By doing so, we could forget about contentEditable’s behaviour and focus on creating a state logic that allows us to render the content to our liking.
+
+## State management in Draft
+
+This state is made up of multiple snapshots at the time the element has been edited.
+
+When we have a text block, we represent it with a Record in the state. A record is an inmutable infromation object, which contains content, styles, element types and more. At the end, the total state of the content can be represented as a list of Records -one for each text block ( **array** )
+
+
+<ExampleImage width={320} height={80} src={'/assets/posts/001/record.png'} alt={'Records in Draftjs'} />
+
+Working with Record allows keeping a persistent data structure in the application, therefore  when edititng content only those Records affected will be recreated and those not necessary will be discarded.
+
+Cursor status works almost the same way as as the content. The cursor state will identify each rendered Record by its **key** and obtains the necessary coordinates that help to save its current position and to calculate the next one by creating and destroying old states in each user action.
+
+By doing this, the DraftJS framework to create rich text elements began to take shape.
+
+## Mentions & Actions
+
+The editor will have an initial state (A) when starting to write, and a final state (Z) when finishing. Each state is a list of Records and each intermediate letter received as input is also a list of Records, so we have a number of intermediate states. Teerefore if we edit our text fot too long, we end up with a huge list of intermediate data which is no use for us at all. However, thanks to persistent data, we can get rid of most snapshots with a lot of shared data to make our memory space relatively small, so when performing actions such as going backwards we simply go back to the previous state and discard the current one.
+
+<ExampleImage height={120} width={320} src={'/assets/posts/001/array.png'} alt={'Records array'} />
+
+In the other hand, mentions are not as simple as they seem. They are section of text that contains metadata but are created from functions so in order for them to functions we should take the initial state of the text (with an @) and create an intermediate state that trims the section of the string and add another that insert the mention with autocomplete and returns to that state with the necessary metadata. This returned state will be the new record and will be rendered. To make that possible, pure functions are used -those that always returns the same thing with the same parametres-. which simply add metadata and return a new state object.
+<br/>
+
+
+```js
+  Record {
+    text: "Live from the Grand Hyatt ...",
+    metadata: [... ,... , 1, 1, 1, 1, 1, ..., 1]
+  }
+
+  function addMention(initialState, ...) {
+    const stateAfterRemoval = removeText(initialState, ...)
+    const stateAfterInsertion = insertText(stateAfterRemoval, ...)
+    const stateWithMention = applyMention(stateAfterInsertion, ...)
+    return stateWithMention
+  }
+```
+
+## DraftJS
+
+Facebook vastly improves their text posts now even allowing images, gifs and sticker in comments. All of this in a clean and scalable way that was introduced to the community under the name DraftJS - a framework made to produce rich text editors, of the WYSIWYG (What you see is what you get) type.

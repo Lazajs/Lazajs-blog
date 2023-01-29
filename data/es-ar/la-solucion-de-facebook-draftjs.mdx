@@ -1,0 +1,78 @@
+---
+title: 'La solución de Facebook: DraftJS'
+description: '¿Cómo se crearon los comentarios en Facebook?'
+date: '2023-01-24'
+category: 'react'
+id: 001
+---
+
+Al escribir un comentario en Facebook, se abre un mundo de opciones que contiene menciones, imágenes, emojis, encuestas y más. Pero esto no siempre fue así, ya que en años previos al 2014, Facebook solo podía aceptar texto plano y menciones como entrada en sus comentarios. Esto se debía a la manera en la que los desarrolladores habían tratado esa parte de la interfaz.
+
+El método utilizado generaba una mala experiencia de usuario por la cantidad de bugs y mala apariencia que tenía en ocasiones donde el usuario incluía menciones. Este funcionaba de tal forma que se generaban nuevos elementos del DOM con cada acción del usuario dentro del **textarea** manipulado por el usuario. Por ejemplo, creando una etiqueta **div** al presionar **enter** y que a su vez envolvía otra etiqueta **p** que contenía un atributo **style** para dar estilos a una mención.
+
+<ExampleImage height={120} width={320} src={'/assets/posts/001/pre2014.png'} alt={'Mención antigua'} />
+
+## Las opciones para mejorar
+
+Para mejorar las entradas de texto, tuvieron varias opciones: 
+
+- Utilizar un **textarea** con **div** y más elementos (solución que ya se utilizaba)
+- Generar el contenido manualmente, es decir, intentar ¨adivinar¨ las acciones del usuario. Esto ocasionaba problemas debidos a que se tenia que crear un cursor de texto falso que previera el lugar donde debía de estar.
+- Utilizar el atributo global contentEditable.
+
+Esta última opción fue la elegida, contentEditable es un atributo enumerado que indica si el elemento debe ser editable por el usuario. Si es así, el navegador modifica su widget para permitir la edición y el navegador creará los elementos necesarios dentro del contenido editado para darle forma.
+
+El contentEditable proporcionaba ventajas a simple vista, como el posicionamiento nativo del cursor, eventos nativos, cualquier necesidad de texto enriquecido disponible, crecimiento automático del elemento, etc. Así como proporciona ventajas out-of-the-box, también tiene sus desventajas, entre ellas su mala fama y rechazo de parte de la comunidad por el funcionamiento impredecible que tiene entre diferentes navegadores.
+
+## React y contentEditable
+
+El reto de Facebook fue hacer que contentEditable fuese compatible con React y para eso debía dejar de funcionar como lo hacia por defecto, donde el estado del elemento siempre estaba ligado al DOM (al contrario de la filosofía de React, donde queremos que los cambios de estados sean los que ocasionen los renderizados correspondientes en el DOM). Para evitar esto, se comenzó por lo mas básico: **e.preventDefault()**.
+
+Estas fueron las pautas para crear un contentEditable controlado: 
+
+- Control estricto sobre el estado de los contenidos (React)
+- Control estricto sobre el cursor (Native Selection API)
+- API declarativa y entendible
+- Ser capaz de realizar todas las acciones que se esperan de un editor de texto enriquecido (copiar/pegar/cortar/spellcheck)
+
+De esta manera, nos podemos olvidar del comportamiento de contentEditable y concentrarnos en crear una logica de estado que nos permita renderizar el contenido a nuestro gusto.
+
+## El estado en DraftJS
+
+El estado se compone de multiples snapshots en el tiempo en que el elemento ha sido editado.
+
+Al tener un bloque de texto, lo representaremos con un Record en el estado. Un Record es un objeto de informacion inmutable, que contiene informacion como contenido, estilos, el tipo de elemento y mas. Al final, el estado total de el contenido se puede representar como una lista ( **array** ) de Records (uno para cada bloque de texto). Al trabajar con Records, permite mantener una estructura de datos persistente en la aplicación, ya que al editar el contenido, solo se volverán a crear aquellos Records afectados y se desecharan aquellos que no sean necesarios.
+
+<ExampleImage width={320} height={80} src={'/assets/posts/001/record.png'} alt={'Record en Draftjs'} />
+
+El estado del cursor funciona de manera casi igual al del contenido. El estado del cursor identificara a cada Record renderizado por su **key** (ya que, recordemos, se trata de una lista renderizada de React) y contiene las coordenadas necesarias que ayuden a guardar su posición actual y poder calcular la siguiente creando y destruyendo viejos estados en cada acción del usuario.
+
+De esta manera el framework DraftJS, para crear elementos de texto enriquecido, empezó a tomar forma.
+
+## Menciones y acciones
+
+El editor tendrá un estado inicial (A) al comenzar a escribir, y un estado final (Z) al terminar. Cada estado es una lista de Records y cada letra intermedia recibida como input tambien lo es, por lo que tenemos una cantidad de estados intermedios. Esto quiere decir que si editamos demasiado tiempo nuestro texto, terminamos con una lista enorme de datos intermedios, los cuales no nos sirven en su totalidad. La buena noticia es que gracias a los datos persistentes, podemos deshacernos de la mayoría de snapshots y quedarnos solo con una cantidad pertinente de snapshots realmente útiles con muchos datos compartidos, lo cual hace que el espacio en memoria sea relativamente pequeño y al realizar acciones como volver hacia atras, simplemente volvemos al estado anterior y desechamos el actual.
+
+<ExampleImage height={120} width={320} src={'/assets/posts/001/array.png'} alt={'Lista de Records'} />
+
+Las menciones no son tan simples como parecen, son secciones de textos que contienen metadatos, pero son creadas a partir de funciones, de tal forma que tomamos el estado inicial del texto (con un @) y crearemos un estado intermedio que recorte esa sección de la cadena, y otra que inserte la mención con autocompletado y devuelva ese estado, con los metadatos necesarios. Este estado devuelto será el nuevo récord y será renderizado. Para hacer esto posible, se utilizan las llamadas funciones puras (aquellas que siempre devuelven lo mismo con los mismos parámetros), que se limitan a agregar metadatos y devolver un nuevo objeto de estado.
+<br/>
+
+  
+```js
+  Record {
+    text: "Live from the Grand Hyatt ...",
+    metadata: [... ,... , 1, 1, 1, 1, 1, ..., 1]
+  }
+
+  function addMention(initialState, ...) {
+    const stateAfterRemoval = removeText(initialState, ...)
+    const stateAfterInsertion = insertText(stateAfterRemoval, ...)
+    const stateWithMention = applyMention(stateAfterInsertion, ...)
+    return stateWithMention
+  }
+```
+
+## DraftJS
+
+Facebook mejora ampliamente sus entradas de texto, permitiendo ahora incluso la inserción de imágenes, gifs y stickers en comentarios. Todo esto, de una manera limpia y escalable que fue abierta a la comunidad con el nombre de DraftJS - el framework para crear editores de texto enriquecidos, del tipo WYSIWYG (What You See Is What You Get).

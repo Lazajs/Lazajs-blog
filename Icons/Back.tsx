@@ -18,6 +18,7 @@ export default function Back (props: SVGProps | undefined) {
     svg {
       cursor: pointer;
       filter: invert();
+      width: 40px;
     }
     `}</style>
   </svg>

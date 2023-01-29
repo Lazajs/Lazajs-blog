@@ -10,10 +10,17 @@ export default function Nav () {
     <nav>
       <ul>
         <Link href={'/'}>
+<<<<<<< HEAD
           <li>Blog</li>
         </Link>
         <Link href={'/lazaro'}>
           <li>Lazaro</li>
+=======
+         <li className='blog'>Blog</li>
+        </Link>
+        <Link href={'/lazaro'}>
+          <li className='lazaro'>Lazaro</li>
+>>>>>>> new
         </Link>
       </ul>
       <style jsx>{`
@@ -30,14 +37,12 @@ export default function Nav () {
  
         li {
           color: ${colors.text};
-        }
-        
-        a {
           border-radius: 5px;
           width: 16rem;
           padding: 1rem;
           text-align:center;
           text-decoration: none;
+          cursor:pointer;
         }
 
         .blog {

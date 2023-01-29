@@ -3,8 +3,11 @@ export const colors = {
   secondary: '#353C45',
   text: '#FAFAFA',
   subText: '#FFFFFFAA',
+  paragraphText: '#e6e1e1',
   hover: '#1e2329',
-  border: '#FFFFFF11'
+  border: '#FFFFFF11',
+  pseudos: '#D9D9D9',
+  react: '#61dbfb'
 }
 
 export const fonts = {
@@ -18,6 +21,17 @@ export const languages = {
 }
 
 export const FILTERS = {
-  NEW: 'Newest',
-  OLD: 'Older'
+  'es-ar': {
+    NEW: 'Ultimos',
+    OLD: 'Antiguos'
+  },
+  'en-us': {
+    NEW: 'Newest',
+    OLD: 'Older'
+  }
+}
+
+export const UTC_LANGUAGES = {
+  ES: 'es-ar',
+  EN: 'en-us'
 }
