@@ -17,7 +17,7 @@ export default function Post ({ data }: Props) {
 
   return (
     <>
-      <Link href='/[slug]/' as={slug} className='link'>
+      <Link href='/[slug]' as={`/${slug}`} className='link'>
           <article>
             <Category type={category} />
             <small>{shownDate}</small>
