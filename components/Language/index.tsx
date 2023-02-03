@@ -12,7 +12,7 @@ export default function Language () {
     <menu>
       <div className="languages">
         {
-          Object.values(UTC_LANGUAGES).map(value => <Link style={{ textDecoration: 'none' }} href={'/'} locale={value} key={value}><p style={{ cursor: 'pointer' }} onClick={() => setActive(value)} className={active === value ? 'active anchor' : 'anchor'}>{value}</p></Link>)
+          Object.values(UTC_LANGUAGES).map(value => <Link style={{ textDecoration: 'none' }} href={'/'} as={`/${value}/`} locale={value} key={value}><p style={{ cursor: 'pointer' }} onClick={() => setActive(value)} className={active === value ? 'active anchor' : 'anchor'}>{value}</p></Link>)
         }
       </div>
       <style jsx>{styles}</style>
