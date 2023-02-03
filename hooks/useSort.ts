@@ -5,6 +5,7 @@ import { FILTERS } from 'constants/default'
 type HookReturns = [PostData[], (option: string, locale: string, posts?:PostData[])=> void]
 
 export default function useSort (posts: PostData[]): HookReturns {
+  const TemporaryFilter = FILTERS as any
   const [postList, setPostList] = useState(() => {
     return posts.sort((a, b) => {
       const dateA = new Date(a.date).getTime()
@@ -18,7 +19,7 @@ export default function useSort (posts: PostData[]): HookReturns {
     const newSorting = currentPosts.sort((a, b) => {
       const dateA = new Date(a.date).getTime()
       const dateB = new Date(b.date).getTime()
-      if (option === FILTERS[locale].OLD) return dateB - dateA
+      if (option === TemporaryFilter[locale].OLD) return dateB - dateA
       return dateA - dateB
     })
 

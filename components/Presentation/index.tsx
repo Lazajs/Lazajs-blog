@@ -1,4 +1,4 @@
-import Photos from './Photos'
+import Photos from '../Photos'
 import Highlight from 'components/Higlight'
 
 export default function Presentation () {

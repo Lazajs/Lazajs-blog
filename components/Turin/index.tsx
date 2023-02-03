@@ -1,5 +1,5 @@
 
-import styles from './styles'
+import styles from 'styles/Turin.style'
 
 export type TurinProps = {
   onClick: ()=> void

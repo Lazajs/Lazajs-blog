@@ -1,8 +1,9 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { PostData } from 'types'
 import Category from './Category'
-import { useMemo, useEffect, useState } from 'react'
-import style from 'components/Post/styles/index'
+import { useMemo } from 'react'
+import style from 'styles/Post.style'
 
 type Props = {
   data: PostData
@@ -10,17 +11,13 @@ type Props = {
 
 export default function Post ({ data }: Props) {
   const { slug, date, title, category } = data
-  const [lang, setLang] = useState<string>('ES-es')
+  const { locale } = useRouter()
 
-  const shownDate = useMemo(() => new Intl.DateTimeFormat(lang, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(date)), [date, lang]) // fixable linter error
-
-  useEffect(() => {
-    navigator && navigator.language && setLang(navigator.language)
-  }, [])
+  const shownDate = useMemo(() => new Intl.DateTimeFormat(locale, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(date)), [date, locale])
 
   return (
     <>
-      <Link href={slug}>
+      <Link href={slug} className='link'>
           <article>
             <Category type={category} />
             <small>{shownDate}</small>

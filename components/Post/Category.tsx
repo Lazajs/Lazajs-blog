@@ -1,9 +1,9 @@
-import Javascript from 'icons/Javascript'
-import Other from 'icons/Other'
-import Git from 'icons/Git'
-import Typescript from 'icons/Typescript'
-import Next from 'icons/Next'
-import React from 'icons/React'
+import Javascript from 'Icons/Javascript'
+import Other from 'Icons/Other'
+import Git from 'Icons/Git'
+import Typescript from 'Icons/Typescript'
+import Next from 'Icons/Next'
+import React from 'Icons/React'
 import { Categories } from 'types'
 
 type Props = {

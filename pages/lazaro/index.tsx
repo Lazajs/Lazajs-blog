@@ -1,7 +1,7 @@
-import style from './styles/index'
+import style from 'styles/Lazaro.style'
 import Nav from 'components/Nav'
-import Layout from './Layout'
-import Presentation from './components/Presentation'
+import Layout from 'components/LazaroLayout'
+import Presentation from 'components/Presentation'
 
 export default function Lazaro () {
   return (

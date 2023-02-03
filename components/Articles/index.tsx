@@ -1,11 +1,11 @@
 import { PostData } from 'types'
 import { useEffect, useState } from 'react'
-import Select from 'pages/components/Select'
+import Select from 'components/Select'
 import { fonts, FILTERS } from 'constants/default'
-import Preferences from 'pages/components/Preferences'
-import Post from 'pages/components/Post'
+import Preferences from 'components/Preferences'
+import Post from 'components/Post'
 import useSort from 'hooks/useSort'
-import Language from '../Language'
+import Language from 'components/Language'
 import { useRouter } from 'next/router'
 
 type Props = {posts : PostData[]}

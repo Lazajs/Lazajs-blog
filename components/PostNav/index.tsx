@@ -1,6 +1,6 @@
-import Back from 'icons/Back'
+import Back from 'Icons/Back'
 import type { PostData } from 'types'
-import style from './styles'
+import style from 'styles/PostNav.style'
 import useI18n from 'hooks/useI18n'
 import { useRouter } from 'next/router'
 

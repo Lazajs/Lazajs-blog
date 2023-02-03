@@ -1,7 +1,7 @@
 import { UTC_LANGUAGES } from 'constants/default'
 import { useState } from 'react'
 import Link from 'next/link'
-import styles from './styles'
+import styles from 'styles/Language.style'
 import { useRouter } from 'next/router'
 
 export default function Language () {

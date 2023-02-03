@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import styles from './styles'
+import styles from 'styles/VisitModal.style'
 import Turin, { TurinProps } from 'components/Turin'
 
 export default function VisitModal ({ ...props }: TurinProps) {

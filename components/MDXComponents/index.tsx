@@ -4,7 +4,7 @@ import SecondHeading from './SecondHeading'
 import UnorderedList from './UnorderedList'
 import Strong from './Strong'
 import ExampleImage from './ExampleImage'
-import Category from 'pages/components/Post/Category'
+import Category from 'components/Post/Category'
 
 const COMPONENTS = {
   p: ({ children }: Children) => <Paragraph>{children}</Paragraph>,

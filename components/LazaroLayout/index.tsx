@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import style from './styles/layout.style'
+import style from 'styles/LazaroLayout.style'
 
-export default function Layout ({ children }: {children: ReactNode}) {
+export default function LazaroLayout ({ children }: {children: ReactNode}) {
   return (
     <>
       <div className='first'>

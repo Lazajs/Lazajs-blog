@@ -2,7 +2,7 @@ import useI18n from 'hooks/useI18n'
 import type { PostData } from 'types'
 import Image from 'next/image'
 import github from 'public/github.svg'
-import style from './styles'
+import style from 'styles/Footer.style'
 
 export default function Footer ({ data }: {data: PostData}) {
   const text = useI18n('footer')
