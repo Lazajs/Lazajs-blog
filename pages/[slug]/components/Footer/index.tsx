@@ -12,7 +12,7 @@ export default function Footer ({ data }: {data: PostData}) {
         {data?.traduction && <span><p className='translator'>{text.translator}: {data?.traduction} -</p><a href={`mailto:agustinagodoy04@gmail.com?Subject=${text.subject}`} target='_blank' rel="noreferrer">Contact mail</a></span>}
         <a className='author' href={'/lazaro'}>{`${text.author}: Lázaro Sánchez`}</a>
         <p>MIT License</p>
-        <a href="#"><Image style={{ filter: 'invert()' }} className='image' src={github} alt='source code' title='Source code' width={50} height={50}/></a>
+        <a href="https://github.com/Lazajs/Lazajs-blog" target={'_blank'} rel="noreferrer"><Image style={{ filter: 'invert()' }} className='image' src={github} alt='source code' title='Source code' width={50} height={50}/></a>
       </footer>
 
       <style jsx>{style}</style>

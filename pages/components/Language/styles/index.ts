@@ -4,7 +4,7 @@ import { colors, fonts } from 'constants/default'
 export default css`
   menu {
     width: fit-content;
-    margin-left: 1rem;
+    margin-left: 3rem;
     font-family: ${fonts.primary};
   }
 

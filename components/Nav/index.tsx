@@ -1,26 +1,33 @@
 import Link from 'next/link'
 import { colors, fonts } from 'constants/default'
 import { useRouter } from 'next/router'
+import NotAvaible from './NotAvaible'
+import { useEffect, useState } from 'react'
 
 export default function Nav () {
   const router = useRouter()
   const isActive = (path: string) => router.pathname === path ? colors.secondary : colors.primary
+  const [message, setMessage] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setMessage(false)
+    }, 1500)
+
+    return () => clearTimeout(timeout)
+  }, [message])
 
   return (
     <nav>
       <ul>
         <Link href={'/'}>
-<<<<<<< HEAD
-          <li>Blog</li>
-        </Link>
-        <Link href={'/lazaro'}>
-          <li>Lazaro</li>
-=======
          <li className='blog'>Blog</li>
         </Link>
-        <Link href={'/lazaro'}>
-          <li className='lazaro'>Lazaro</li>
->>>>>>> new
+        <Link href={'/'}>
+          <li className='lazaro' onClick={() => setMessage(true)} onMouseEnter={() => setMessage(true)}>
+            Lazaro
+            {message && <NotAvaible />}
+          </li>
         </Link>
       </ul>
       <style jsx>{`
@@ -50,8 +57,12 @@ export default function Nav () {
         }
 
         .lazaro {
-          background-color: ${isActive('/lazaro')}
+          postion: relative;
+          color: #FAFAFA33;
+          background-color: transparent;
         }
+
+        .lazaro:
       `}</style>
     </nav>
   )

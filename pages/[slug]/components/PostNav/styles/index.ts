@@ -34,4 +34,9 @@ export default css`
   b,a {
     color: ${colors.subText};
   }
+
+  small {
+    text-align: center;
+    color: #ffffffcc;
+  }
 `
