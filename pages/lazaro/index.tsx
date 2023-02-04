@@ -1,16 +1,20 @@
 import style from 'styles/Lazaro.style'
 import Nav from 'components/Nav'
-import Layout from 'components/LazaroLayout'
+import LazaroLayout from 'components/LazaroLayout'
 import Presentation from 'components/Presentation'
+import Head from 'next/head'
 
 export default function Lazaro () {
   return (
-    <Layout>
-      <section>
-        <Nav />
-        <Presentation />
-        <style jsx>{style}</style>
-      </section>
-    </Layout>
+      <LazaroLayout>
+        <Head>
+          <title> Portfolio - lazajs </title>
+        </Head>
+        <section>
+          <Nav />
+          <Presentation />
+          <style jsx>{style}</style>
+        </section>
+      </LazaroLayout>
   )
 }
