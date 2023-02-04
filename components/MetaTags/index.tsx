@@ -13,8 +13,8 @@ export default function MetaTags ({ children }: {children: ReactNode}) {
         <meta name='description' property='og:description' content='Read interesting development stories and know more about Lazaro!'/>
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <GoogleTags />
       </Head>
+      <GoogleTags />
       {children}
     </>
   )
