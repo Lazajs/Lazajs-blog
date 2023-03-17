@@ -10,12 +10,18 @@ import Layout from 'components/Layout'
 const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
   return (
       <Layout>
-        <Head>
-          <title> Blog - lazajs </title>
-        </Head>
-        <Nav />
-        <Header />
-        <Articles posts={posts} />
+        <div className='animation'>
+          <Head>
+            <title> Blog - lazajs </title>
+          </Head>
+          <Nav />
+          <Header />
+          <Articles posts={posts} />
+        </div>
+        <style jsx>{`
+    
+
+        `}</style>
       </Layout>
   )
 }

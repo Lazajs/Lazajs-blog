@@ -27,6 +27,16 @@
       "subject": "Hello!%20I%20like%20being%20able%20to%20communicate%20with%20you.%20Your%20work%20done%20in%20Lazajs%20is%20excellent..."
     }
   },
+  "articles": {
+    "es-ar": {
+      "old": "Antiguos",
+      "new": "Ultimos"
+    },
+    "en-us": {
+      "old": "Older",
+      "new": "Newest"
+    }
+  },
   "notavaible": {
     "es-ar": {
       "text": "Esta sección aún no está disponible"

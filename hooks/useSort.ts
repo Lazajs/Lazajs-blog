@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import type { PostData } from 'types'
-import { FILTERS } from 'constants/default'
+import useI18n from './useI18n'
 
-type HookReturns = [PostData[], (option: string, locale: string, posts?:PostData[])=> void]
+type HookReturns = [string[], PostData[], (option: string, posts?:PostData[])=> void]
 
 export default function useSort (posts: PostData[]): HookReturns {
-  const TemporaryFilter = FILTERS as any
+  const { old: older, new: newer } = useI18n('articles')
+  const sortValuesByLang = [newer, older]
   const [postList, setPostList] = useState(() => {
     return posts.sort((a, b) => {
       const dateA = new Date(a.date).getTime()
@@ -14,17 +15,17 @@ export default function useSort (posts: PostData[]): HookReturns {
     })
   })
 
-  const sorter = (option: string, locale: string, posts?: PostData[]) => {
+  const sorter = (option: string, posts?: PostData[]) => {
     const currentPosts = posts || postList
     const newSorting = currentPosts.sort((a, b) => {
       const dateA = new Date(a.date).getTime()
       const dateB = new Date(b.date).getTime()
-      if (option === TemporaryFilter[locale].OLD) return dateB - dateA
+      if (option === older) return dateB - dateA
       return dateA - dateB
     })
 
     setPostList(newSorting)
   }
 
-  return [postList, sorter]
+  return [sortValuesByLang, postList, sorter]
 }

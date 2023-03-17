@@ -7,6 +7,7 @@ export default function Layout ({ children }: Props) {
     <main>
 
       {children}
+
       <style jsx>{`
         main {
           padding: 1.3rem;

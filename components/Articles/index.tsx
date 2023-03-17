@@ -16,17 +16,17 @@ export default function Articles ({ posts }: Props) {
   const { locale } = useRouter()
   const lang = locale as Key
   const [filter, setFilter] = useState<string>('')
-  const [postList, sorter] = useSort(posts)
+  const [sortValuesByLang, postList, sorter] = useSort(posts)
 
   useEffect(() => {
-    sorter(filter, lang, posts)
+    sorter(filter, posts)
   }, [posts, sorter, filter, lang])
 
   return (
     <section>
       <Preferences>
         <Language />
-        <Select values={[FILTERS[lang].NEW, FILTERS[lang].OLD]} setState={setFilter}/>
+        <Select values={sortValuesByLang} setState={setFilter}/>
       </Preferences>
 
       <div>

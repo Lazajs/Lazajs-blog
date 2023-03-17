@@ -22,7 +22,7 @@ export default function ExampleImage ({ src, alt, height, width, description }: 
           text-align: center;
           margin: auto;
           width: 50%;
-          min-width: 500px;
+          min-width: 350px;
           opacity: .9;
         }
       `}</style>
