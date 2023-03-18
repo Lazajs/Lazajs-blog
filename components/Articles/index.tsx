@@ -1,32 +1,21 @@
 import { PostData } from 'types'
-import { useEffect, useState } from 'react'
 import Select from 'components/Select'
-import { fonts, FILTERS } from 'constants/default'
+import { fonts } from 'constants/default'
 import Preferences from 'components/Preferences'
 import Post from 'components/Post'
 import useSort from 'hooks/useSort'
 import Language from 'components/Language'
-import { useRouter } from 'next/router'
 
 type Props = {posts : PostData[]}
 
-type Key = keyof typeof FILTERS
-
 export default function Articles ({ posts }: Props) {
-  const { locale } = useRouter()
-  const lang = locale as Key
-  const [filter, setFilter] = useState<string>('')
-  const [sortValuesByLang, postList, sorter] = useSort(posts)
-
-  useEffect(() => {
-    sorter(filter, posts)
-  }, [posts, sorter, filter, lang])
-
+  const [postList, sortValues, sortBy] = useSort(posts)
+  console.log(sortValues)
   return (
     <section>
       <Preferences>
         <Language />
-        <Select values={sortValuesByLang} setState={setFilter}/>
+        <Select valuesByLang={sortValues} sortBy={sortBy} />
       </Preferences>
 
       <div>
