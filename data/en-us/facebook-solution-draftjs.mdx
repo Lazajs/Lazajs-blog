@@ -12,7 +12,7 @@ When writing a Facebook comment a world full of options opens up containing ment
 This method resulted in a bad user experience due to the amount of bugs and bad appeareance it had when the user included mentions. It worked by generating new DOM elements with each user action witihin **textarea** manipulated by the user. For example, creating a **div** tag by pressing **enter** which in turn wrapped another **p** tag containing a **style** attribute due to a mention
 
 
-<ExampleImage height={120} width={320} src={'/assets/posts/001/pre2014.png'} alt={'Old mentions'} />
+<ExampleImage height={120} width={320} scaleBy={3} src={'/assets/posts/001/pre2014.png'} alt={'Old mentions'} />
 
 ## How to get better
 
@@ -46,7 +46,7 @@ This state is made up of multiple snapshots at the time the element has been edi
 When we have a text block, we represent it with a Record in the state. A record is an inmutable infromation object, which contains content, styles, element types and more. At the end, the total state of the content can be represented as a list of Records -one for each text block ( **array** )
 
 
-<ExampleImage width={320} height={80} src={'/assets/posts/001/record.png'} alt={'Records in Draftjs'} />
+<ExampleImage width={320} height={80} scaleBy={3} src={'/assets/posts/001/record.png'} alt={'Records in Draftjs'} />
 
 Working with Record allows keeping a persistent data structure in the application, therefore  when edititng content only those Records affected will be recreated and those not necessary will be discarded.
 
@@ -58,7 +58,7 @@ By doing this, the DraftJS framework to create rich text elements began to take 
 
 The editor will have an initial state (A) when starting to write, and a final state (Z) when finishing. Each state is a list of Records and each intermediate letter received as input is also a list of Records, so we have a number of intermediate states. Teerefore if we edit our text fot too long, we end up with a huge list of intermediate data which is no use for us at all. However, thanks to persistent data, we can get rid of most snapshots with a lot of shared data to make our memory space relatively small, so when performing actions such as going backwards we simply go back to the previous state and discard the current one.
 
-<ExampleImage height={120} width={320} src={'/assets/posts/001/array.png'} alt={'Records array'} />
+<ExampleImage height={120} width={320} scaleBy={3} src={'/assets/posts/001/array.png'} alt={'Records array'} />
 
 In the other hand, mentions are not as simple as they seem. They are section of text that contains metadata but are created from functions so in order for them to functions we should take the initial state of the text (with an @) and create an intermediate state that trims the section of the string and add another that insert the mention with autocomplete and returns to that state with the necessary metadata. This returned state will be the new record and will be rendered. To make that possible, pure functions are used -those that always returns the same thing with the same parametres-. which simply add metadata and return a new state object.
 <br/>
