@@ -1,13 +1,11 @@
+import Nav from 'components/Nav'
 import { ReactNode } from 'react'
 
-type Props = {children : ReactNode}
-
-export default function Layout ({ children }: Props) {
+export default function SharedLayout ({ children }: {children: ReactNode}) {
   return (
     <main>
-
+      <Nav />
       {children}
-
       <style jsx>{`
         main {
           padding: 1.3rem;

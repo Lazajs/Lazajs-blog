@@ -1,21 +1,14 @@
 import Link from 'next/link'
 import { colors, fonts } from 'constants/default'
 import { useRouter } from 'next/router'
-import NotAvaible from './NotAvaible'
-import { useEffect, useState } from 'react'
 
 export default function Nav () {
-  const router = useRouter()
-  const isActive = (path: string) => router.pathname === path ? colors.secondary : colors.primary
-  const [message, setMessage] = useState(false)
+  const { pathname } = useRouter()
+  const isActive = (path: string) => pathname === path ? colors.secondary : colors.primary
+  console.log(pathname)
+  const withNavPages = ['/lazaro', '/']
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMessage(false)
-    }, 1500)
-
-    return () => clearTimeout(timeout)
-  }, [message])
+  if (!withNavPages.includes(pathname)) return null // if the page is not in the array, the Nav will not be rendered
 
   return (
     <nav>
@@ -23,10 +16,9 @@ export default function Nav () {
         <Link href={'/'}>
          <li className='blog'>Blog</li>
         </Link>
-        <Link href={'/'}>
-          <li className='lazaro' onClick={() => setMessage(true)} onMouseEnter={() => setMessage(true)}>
+        <Link href={'/lazaro'}>
+          <li className='lazaro'>
             Lazaro
-            {message && <NotAvaible />}
           </li>
         </Link>
       </ul>
@@ -57,12 +49,8 @@ export default function Nav () {
         }
 
         .lazaro {
-          postion: relative;
-          color: #FAFAFA33;
-          background-color: transparent;
+          background-color: ${isActive('/lazaro')}
         }
-
-        .lazaro:
       `}</style>
     </nav>
   )

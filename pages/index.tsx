@@ -1,28 +1,23 @@
 import type { NextPage } from 'next'
 import type { PostData } from 'types'
-import Head from 'next/head'
 import { getAllFilesMetadata } from 'lib/mdx'
 import Articles from 'components/Articles'
 import Header from 'components/Header'
-import Nav from 'components/Nav'
-import Layout from 'components/Layout'
+import Head from 'next/head'
 
 const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
   return (
-      <Layout>
+      <>
+        <Head>
+          <title> Blog - lazajs </title>
+        </Head>
         <div className='animation'>
-          <Head>
-            <title> Blog - lazajs </title>
-          </Head>
-          <Nav />
           <Header />
           <Articles posts={posts} />
         </div>
         <style jsx>{`
-    
-
         `}</style>
-      </Layout>
+      </>
   )
 }
 

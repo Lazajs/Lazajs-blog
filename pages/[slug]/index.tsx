@@ -7,7 +7,6 @@ import style from 'styles/ShownArticle.style'
 import MDXComponents from 'components/MDXComponents'
 import 'highlight.js/styles/atom-one-dark.css'
 import Footer from 'components/Footer'
-import Layout from 'components/Layout'
 
 interface PostMetadata {
   source: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>>,
@@ -22,7 +21,6 @@ type StaticProps = {
 export default function ShownArticle ({ source, frontMatter }: PostMetadata) {
   return (
     <>
-      <Layout>
         <Head>
           <title>
             {`${frontMatter.title} - lazajs`}
@@ -32,7 +30,6 @@ export default function ShownArticle ({ source, frontMatter }: PostMetadata) {
         <article>
           <MDXRemote {...source} components={MDXComponents} />
         </article>
-      </Layout>
       <Footer data={frontMatter}/>
       <style jsx>{style}</style>
     </>

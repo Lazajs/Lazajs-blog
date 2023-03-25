@@ -2,8 +2,7 @@ import css from 'styled-jsx/css'
 
 export default css`
   .footer {
-    width: 100vw;
-    background: #000;
+    width: 100%;
     height: 20rem;
     display: flex;
     flex-direction: column;

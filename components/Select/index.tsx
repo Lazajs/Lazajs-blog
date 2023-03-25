@@ -14,7 +14,8 @@ export default function Select ({ valuesByLang, sortBy }: Props) {
     const text = el.textContent
     if (text) {
       sortBy(text)
-      setSelectedIndex(valuesByLang.indexOf(text))
+      const index = valuesByLang.indexOf(text)
+      if (selectedIndex !== index) setSelectedIndex(index)
     }
   }
 
