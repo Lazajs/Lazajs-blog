@@ -20,7 +20,7 @@ export default function Post ({ data }: Props) {
       <Card css={{ p: '$6', mw: '370px', bg: colors.secondary }}>
         <Card.Header>
           <Category type={category} />
-          <Spacer x={1}/>
+          <Spacer x={0.2}/>
           <Grid.Container css={{ pl: '$6' }}>
             <Grid xs={12}>
               <Text h4 css={{ lineHeight: '$xs', color: colors.text }}>
