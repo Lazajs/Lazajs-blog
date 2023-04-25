@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { PostData } from 'types'
 import Category from './Category'
 import { useMemo } from 'react'
-import { Card, Text, Grid, Button, Spacer } from '@nextui-org/react'
-import { colors, fonts } from 'constants/default'
+import { Card, Text, Grid, Spacer, Link as TextLink } from '@nextui-org/react'
+import { colors } from 'constants/default'
 
 type Props = {
   data: PostData
@@ -38,11 +38,20 @@ export default function Post ({ data }: Props) {
           </Text>
         </Card.Body>
         <Card.Footer>
-            <Button size='lg' css={{ fontSize: '$2xl', fontFamily: fonts.primary, bg: colors.react }}>
-              <Link href='/[slug]' as={`/${slug}`} style={{ color: colors.text, textDecoration: 'none' }}>Read</Link>
-          </Button>
+          <Link href='/[slug]' as={`/${slug}`}>
+            <TextLink block color='primary' style={{ cursor: 'pointer', fontSize: '1.8', paddingLeft: '1rem', paddingRight: '1rem' }}>Read</TextLink>
+          </Link>
         </Card.Footer>
       </Card>
+      <style jsx>{`
+        button a {
+          color: ${colors.text};
+          text-decoration: none;
+          height: 100%;
+          width: 100%;
+
+        }
+      `}</style>
     </>
   )
 }
