@@ -50,16 +50,15 @@ export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStat
 
         const toReactColor = ['core_0', 'electron_2_0', 'electron__3_0', 'electron_1_0']
         const toWhiteColor = ['electron_shell_0', 'electron_shell2_0', 'electron_shell3_0', 'electron_shell3_0']
+        const colorReact = new THREE.Color(0x61dafb)
+        const colorWhite = new THREE.Color(0xffffff)
 
-        // Change the color of the gltf model
         gltf.scene.traverse((child) => {
           if (child.isMesh) {
             if (toReactColor.includes(child.name)) {
-              child.material.color.set('#61dafb')
+              child.material.color.set(colorReact)
             } else if (toWhiteColor.includes(child.name)) {
-              child.material.color.set('#ffffff')
-            } else {
-              child.material.color.set('#000000')
+              child.material.color.set(colorWhite)
             }
           }
         })

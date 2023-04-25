@@ -18,7 +18,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "rehype-highlight": "^6.0.0",
-    "three": "^0.150.1",
+    "three": "^0.134.0",
     "threeasy": "^0.1.13"
   },
   "devDependencies": {

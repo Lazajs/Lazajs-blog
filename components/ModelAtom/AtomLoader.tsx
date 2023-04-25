@@ -12,14 +12,15 @@ function AtomLoader () {
 
   return (
     <>
-    {isLoading ? <span> <Loading loadingCss={{ $$loadingSize: '100px', $$loadingBorder: '10px' }} /> </span> : ''}
+    {isLoading ? <span> <Loading loadingCss={{ $$loadingSize: '50px', $$loadingBorder: '5px' }} /></span> : ''}
     <ModelAtom setLoading={setIsLoading} />
     <style jsx>{`
       span {
         width: 100%;
-        height: 100%;
+        height: 400px;
         display: grid;
         place-content: center;
+        margin: 0;
       }
     `}</style>
     </>
