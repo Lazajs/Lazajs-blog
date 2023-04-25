@@ -12,7 +12,7 @@ function AtomLoader () {
 
   return (
     <>
-    {isLoading ? <span> <Loading size='xl' /> </span> : ''}
+    {isLoading ? <span> <Loading loadingCss={{ $$loadingSize: '100px', $$loadingBorder: '10px' }} /> </span> : ''}
     <ModelAtom setLoading={setIsLoading} />
     <style jsx>{`
       span {
