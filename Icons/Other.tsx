@@ -19,7 +19,6 @@ export default function Other (props: {}) {
         transform: scale(3.2);
         margin: .8rem;
         margin-left: .7rem;
-        margin-right: 1.3rem;
       }
     `}</style>
   </svg>
