@@ -1,6 +1,6 @@
 import style from 'styles/Lazaro.style'
-import Atom from 'components/Atom'
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Lazaro () {
   return (
@@ -9,9 +9,12 @@ export default function Lazaro () {
         <title> Portfolio - lazajs </title>
       </Head>
       <section>
-        <Atom />
-        <style jsx>{style}</style>
+        <h2>Nothing here yet! :(</h2>
+        <p>
+          <Link className='link' href={'/'}>Go Back</Link>
+          </p>
       </section>
+      <style jsx>{style}</style>
     </>
   )
 }

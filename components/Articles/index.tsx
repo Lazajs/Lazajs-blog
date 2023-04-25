@@ -10,7 +10,6 @@ type Props = {posts : PostData[]}
 
 export default function Articles ({ posts }: Props) {
   const [postList, sortValues, sortBy] = useSort(posts)
-  console.log(sortValues)
   return (
     <section>
       <Preferences>

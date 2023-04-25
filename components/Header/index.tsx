@@ -41,6 +41,7 @@ export default function Header () {
         p {
           font-size: 2rem;
           text-align: center;
+          margin: 0;
           font-family: ${fonts.secondary};
           color: ${colors.text}
         }

@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 export default function Nav () {
   const { pathname } = useRouter()
   const isActive = (path: string) => pathname === path ? colors.secondary : colors.primary
-  console.log(pathname)
   const withNavPages = ['/lazaro', '/']
 
   if (!withNavPages.includes(pathname)) return null // if the page is not in the array, the Nav will not be rendered
