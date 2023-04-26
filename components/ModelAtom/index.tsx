@@ -50,7 +50,7 @@ export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStat
 
         const toReactColor = ['core_0', 'electron_2_0', 'electron__3_0', 'electron_1_0']
         const toWhiteColor = ['electron_shell_0', 'electron_shell2_0', 'electron_shell3_0', 'electron_shell3_0']
-        const colorReact = new THREE.Color(0x61dafb)
+        const colorReact = new THREE.Color(0x03cbff)
         const colorWhite = new THREE.Color(0xffffff)
 
         gltf.scene.traverse((child) => {
