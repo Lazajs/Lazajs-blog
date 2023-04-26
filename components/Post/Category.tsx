@@ -9,16 +9,16 @@ type Props = {
 export default function Category ({ type }: Props) {
   switch (type) {
     case 'javascript':
-      return <SiJavascript size={'50px'} />
+      return <SiJavascript size={'50px'} color='#61dbfb' />
     case 'typescript':
-      return <SiTypescript size={'50px'} />
+      return <SiTypescript size={'50px'} color='#61dbfb' />
     case 'git':
-      return <SiGit size={'50px'} />
+      return <SiGit size={'50px'} color='#61dbfb' />
     case 'nextjs':
-      return <SiNextdotjs size={'50px'} />
+      return <SiNextdotjs size={'50px'} color='#61dbfb' />
     case 'react':
-      return <SiReact size={'50px'} />
+      return <SiReact size={'50px'} color='#61dbfb' />
     default:
-      return <BsFillInfoSquareFill size={'50px'} />
+      return <BsFillInfoSquareFill size={'50px'} color='#61dbfb' />
   }
 }
