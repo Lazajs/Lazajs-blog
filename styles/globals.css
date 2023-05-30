@@ -32,6 +32,7 @@ body {
   font-size: 16px; 
   font-size: 1.6rem; 
   line-height: 1.5;
+  background-image: url('/atom-background.png');
 }
 
 body::-webkit-scrollbar {
