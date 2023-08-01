@@ -1,9 +1,5 @@
-import Javascript from 'Icons/Javascript'
-import Other from 'Icons/Other'
-import Git from 'Icons/Git'
-import Typescript from 'Icons/Typescript'
-import Next from 'Icons/Next'
-import React from 'Icons/React'
+import { SiTypescript, SiNextdotjs, SiReact, SiJavascript, SiGit } from 'react-icons/si'
+import { BsFillInfoSquareFill } from 'react-icons/bs'
 import { Categories } from 'types'
 
 type Props = {
@@ -13,16 +9,16 @@ type Props = {
 export default function Category ({ type }: Props) {
   switch (type) {
     case 'javascript':
-      return <Javascript />
+      return <SiJavascript size={'50px'} color='#61dbfb' />
     case 'typescript':
-      return <Typescript />
+      return <SiTypescript size={'50px'} color='#61dbfb' />
     case 'git':
-      return <Git />
+      return <SiGit size={'50px'} color='#61dbfb' />
     case 'nextjs':
-      return <Next />
+      return <SiNextdotjs size={'50px'} color='#61dbfb' />
     case 'react':
-      return <React />
+      return <SiReact size={'50px'} color='#61dbfb' />
     default:
-      return <Other />
+      return <BsFillInfoSquareFill size={'50px'} color='#61dbfb' />
   }
 }

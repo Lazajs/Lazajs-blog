@@ -1,30 +1,27 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import type { PostData } from 'types'
-import { FILTERS } from 'constants/default'
+import useI18n from './useI18n'
 
-type HookReturns = [PostData[], (option: string, locale: string, posts?:PostData[])=> void]
+// type HookReturns = [PostData[], string[], (option: string, posts?:PostData[])=> void]
 
-export default function useSort (posts: PostData[]): HookReturns {
-  const TemporaryFilter = FILTERS as any
-  const [postList, setPostList] = useState(() => {
-    return posts.sort((a, b) => {
-      const dateA = new Date(a.date).getTime()
-      const dateB = new Date(b.date).getTime()
-      return dateB - dateA
-    })
-  })
+export default function useSort (posts: PostData[]): any {
+  const sortValues = useI18n('articles')
+  const { new: newer, old: older } = sortValues
+  const [sortBy, setSortBy] = useState<keyof typeof sortValues>()
 
-  const sorter = (option: string, locale: string, posts?: PostData[]) => {
-    const currentPosts = posts || postList
-    const newSorting = currentPosts.sort((a, b) => {
-      const dateA = new Date(a.date).getTime()
-      const dateB = new Date(b.date).getTime()
-      if (option === TemporaryFilter[locale].OLD) return dateB - dateA
-      return dateA - dateB
+  const sorter = useCallback(() => {
+    const newSorting = [...posts].sort((a, b) => {
+      const dateA = new Date(a.date).getDate()
+      const dateB = new Date(b.date).getDate()
+      if (sortBy === newer) return dateA - dateB
+      else if (sortBy === older) return dateB - dateA
+      else return 0
     })
 
-    setPostList(newSorting)
-  }
+    return newSorting
+  }, [newer, older, posts, sortBy])
 
-  return [postList, sorter]
+  const postList = useMemo(sorter, [posts, sortBy, newer, older, sorter])
+
+  return [postList, [newer, older], setSortBy]
 }

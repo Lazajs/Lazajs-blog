@@ -1,30 +1,36 @@
 import { fonts, colors } from 'constants/default'
-import React, { Dispatch, SetStateAction, useState } from 'react'
-
-type Props = {
-  values: string[]
-  setState: Dispatch<SetStateAction<string>>,
+import React, { useEffect, useState } from 'react'
+interface Props {
+  valuesByLang: string[]
+  sortBy: (val: string)=> void
 }
 
-export default function Select ({ values, setState }: Props) {
+export default function Select ({ valuesByLang, sortBy }: Props) {
   const [isActive, setActive] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const handleSelect = (e: React.SyntheticEvent) => {
     const el = e.target as HTMLParagraphElement
     const text = el.textContent
-    setState(text!)
-    setSelectedIndex(values.indexOf(text!))
+    if (text) {
+      sortBy(text)
+      const index = valuesByLang.indexOf(text)
+      if (selectedIndex !== index) setSelectedIndex(index)
+    }
   }
+
+  useEffect(() => {
+    sortBy(valuesByLang[selectedIndex])
+  }, [valuesByLang])
 
   return (
     <>
       <span className='holder' onClick={() => setActive(!isActive)}>
-        <b>{values[selectedIndex]}</b>
+        <b>{valuesByLang[selectedIndex]}</b>
         {
           isActive
-            ? values.map((value: string) => {
-              if (value === values[selectedIndex]) return ''
+            ? valuesByLang.map((value: string) => {
+              if (value === valuesByLang[selectedIndex]) return ''
               return <p key={value} className='option' onClick={handleSelect}>{value}</p>
             })
             : ''

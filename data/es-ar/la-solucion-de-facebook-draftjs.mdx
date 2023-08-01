@@ -10,7 +10,7 @@ Al escribir un comentario en Facebook, se abre un mundo de opciones que contiene
 
 El método utilizado generaba una mala experiencia de usuario por la cantidad de bugs y mala apariencia que tenía en ocasiones donde el usuario incluía menciones. Este funcionaba de tal forma que se generaban nuevos elementos del DOM con cada acción del usuario dentro del **textarea** manipulado por el usuario. Por ejemplo, creando una etiqueta **div** al presionar **enter** y que a su vez envolvía otra etiqueta **p** que contenía un atributo **style** para dar estilos a una mención.
 
-<ExampleImage height={120} width={320} src={'/assets/posts/001/pre2014.png'} alt={'Mención antigua'} />
+<ExampleImage height={120} width={320} scaleBy={3} src={'/assets/posts/001/pre2014.png'} alt={'Mención antigua'} />
 
 ## Las opciones para mejorar
 
@@ -43,7 +43,7 @@ El estado se compone de multiples snapshots en el tiempo en que el elemento ha s
 
 Al tener un bloque de texto, lo representaremos con un Record en el estado. Un Record es un objeto de informacion inmutable, que contiene informacion como contenido, estilos, el tipo de elemento y mas. Al final, el estado total de el contenido se puede representar como una lista ( **array** ) de Records (uno para cada bloque de texto). Al trabajar con Records, permite mantener una estructura de datos persistente en la aplicación, ya que al editar el contenido, solo se volverán a crear aquellos Records afectados y se desecharan aquellos que no sean necesarios.
 
-<ExampleImage width={320} height={80} src={'/assets/posts/001/record.png'} alt={'Record en Draftjs'} />
+<ExampleImage width={320} height={80} scaleBy={3} src={'/assets/posts/001/record.png'} alt={'Record en Draftjs'} />
 
 El estado del cursor funciona de manera casi igual al del contenido. El estado del cursor identificara a cada Record renderizado por su **key** (ya que, recordemos, se trata de una lista renderizada de React) y contiene las coordenadas necesarias que ayuden a guardar su posición actual y poder calcular la siguiente creando y destruyendo viejos estados en cada acción del usuario.
 
@@ -53,7 +53,7 @@ De esta manera el framework DraftJS, para crear elementos de texto enriquecido, 
 
 El editor tendrá un estado inicial (A) al comenzar a escribir, y un estado final (Z) al terminar. Cada estado es una lista de Records y cada letra intermedia recibida como input tambien lo es, por lo que tenemos una cantidad de estados intermedios. Esto quiere decir que si editamos demasiado tiempo nuestro texto, terminamos con una lista enorme de datos intermedios, los cuales no nos sirven en su totalidad. La buena noticia es que gracias a los datos persistentes, podemos deshacernos de la mayoría de snapshots y quedarnos solo con una cantidad pertinente de snapshots realmente útiles con muchos datos compartidos, lo cual hace que el espacio en memoria sea relativamente pequeño y al realizar acciones como volver hacia atras, simplemente volvemos al estado anterior y desechamos el actual.
 
-<ExampleImage height={120} width={320} src={'/assets/posts/001/array.png'} alt={'Lista de Records'} />
+<ExampleImage height={120} width={320} scaleBy={3} src={'/assets/posts/001/array.png'} alt={'Lista de Records'} />
 
 Las menciones no son tan simples como parecen, son secciones de textos que contienen metadatos, pero son creadas a partir de funciones, de tal forma que tomamos el estado inicial del texto (con un @) y crearemos un estado intermedio que recorte esa sección de la cadena, y otra que inserte la mención con autocompletado y devuelva ese estado, con los metadatos necesarios. Este estado devuelto será el nuevo récord y será renderizado. Para hacer esto posible, se utilizan las llamadas funciones puras (aquellas que siempre devuelven lo mismo con los mismos parámetros), que se limitan a agregar metadatos y devolver un nuevo objeto de estado.
 <br/>

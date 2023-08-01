@@ -19,7 +19,7 @@ export default function Header () {
           margin: 2rem auto;
           flex-direction: column;
           align-items: center;
-          height: 40vh;
+          height: 25vh;
           justify-content: space-around;
         }
 
@@ -41,6 +41,7 @@ export default function Header () {
         p {
           font-size: 2rem;
           text-align: center;
+          margin: 0;
           font-family: ${fonts.secondary};
           color: ${colors.text}
         }

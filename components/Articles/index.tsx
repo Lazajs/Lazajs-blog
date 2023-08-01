@@ -1,37 +1,32 @@
 import { PostData } from 'types'
-import { useEffect, useState } from 'react'
 import Select from 'components/Select'
-import { fonts, FILTERS } from 'constants/default'
+import { fonts } from 'constants/default'
 import Preferences from 'components/Preferences'
 import Post from 'components/Post'
 import useSort from 'hooks/useSort'
 import Language from 'components/Language'
-import { useRouter } from 'next/router'
+import { Grid, Spacer } from '@nextui-org/react'
 
 type Props = {posts : PostData[]}
 
-type Key = keyof typeof FILTERS
-
 export default function Articles ({ posts }: Props) {
-  const { locale } = useRouter()
-  const lang = locale as Key
-  const [filter, setFilter] = useState<string>('')
-  const [postList, sorter] = useSort(posts)
-
-  useEffect(() => {
-    sorter(filter, lang, posts)
-  }, [posts, sorter, filter, lang])
-
+  const [postList, sortValues, sortBy] = useSort(posts)
   return (
     <section>
       <Preferences>
         <Language />
-        <Select values={[FILTERS[lang].NEW, FILTERS[lang].OLD]} setState={setFilter}/>
+        <Select valuesByLang={sortValues} sortBy={sortBy} />
       </Preferences>
 
-      <div>
-        {postList.map((post: PostData) => <Post key={post.slug} data={post} />)}
-      </div>
+      <Spacer y={2} />
+      <Grid.Container justify='center' gap={2}>
+        {postList.map((post: PostData) => (
+          <Grid xl key={post.slug}>
+            <Post data={post} />
+          </Grid>
+        )
+        )}
+      </Grid.Container>
 
       <style jsx>{`
         section {
@@ -42,15 +37,6 @@ export default function Articles ({ posts }: Props) {
       
         .wrapper {
           position: relative;
-        }
-      
-        div {
-          margin-top: 2rem;
-          height: 10rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 1rem;
         }
       `}</style>
     </section>
