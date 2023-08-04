@@ -9,6 +9,7 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@module-federation/nextjs-mf": "^6.2.1",
     "@nextui-org/react": "^1.0.0-beta.12",
     "@types/three": "^0.149.0",
     "gray-matter": "^4.0.3",
@@ -34,6 +35,7 @@
     "eslint-plugin-n": "^15.3.0",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.10",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "webpack": "^5.88.2"
   }
 }
