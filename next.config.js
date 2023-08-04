@@ -21,13 +21,9 @@ const nextConfig = {
             : `section_mf@https://mf-lazajs.vercel.app/_next/static/${isServer ? 'ssr' : 'chunks'}/remoteEntry.js`
         },
         extraOptions: {
-          exposePages: true,
-          automaticAsyncBoundary: true
-        },
-        shared: [
-          'react',
-          'react-dom'
-        ]
+          // exposePages: true,
+          // automaticAsyncBoundary: true
+        }
       })
     )
     return config
