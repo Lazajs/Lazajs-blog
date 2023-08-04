@@ -19,12 +19,12 @@
     "es-ar": {
       "translator": "Traductor",
       "author": "Autor",
-      "subject": "Hola!%20Me%20agrada%20poder%20comunicarme%20contigo..."
+      "subject": "Hola!%20Me%20agrada%20poder%20comunicarme%20contigo.%20Es%20excelente%20tu%20trabajo%20realizado%20en%20Lazajs..."
     },
     "en-us": {
       "translator": "Translator",
       "author": "Author",
-      "subject": "Hello!%20I%20like%20being%20able%20to%20communicate%20with%20you..."
+      "subject": "Hello!%20I%20like%20being%20able%20to%20communicate%20with%20you.%20Your%20work%20done%20in%20Lazajs%20is%20excellent..."
     }
   },
   "articles": {
