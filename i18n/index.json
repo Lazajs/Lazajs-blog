@@ -54,5 +54,13 @@
       "github": "¿Algún error?",
       "edit": " Edítalo en Github"
     }
+  },
+  "article": {
+    "en-us": {
+      "goto": "Read" 
+    },
+    "es-ar": {
+      "goto": "Leer"
+    }
   }
 }

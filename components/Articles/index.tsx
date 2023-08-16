@@ -5,7 +5,6 @@ import Preferences from 'components/Preferences'
 import Post from 'components/Post'
 import useSort from 'hooks/useSort'
 import Language from 'components/Language'
-import { Grid, Spacer } from '@nextui-org/react'
 
 type Props = {posts : PostData[]}
 
@@ -18,15 +17,13 @@ export default function Articles ({ posts }: Props) {
         <Select valuesByLang={sortValues} sortBy={sortBy} />
       </Preferences>
 
-      <Spacer y={2} />
-      <Grid.Container justify='center' gap={2}>
-        {postList.map((post: PostData) => (
-          <Grid xl key={post.slug}>
-            <Post data={post} />
-          </Grid>
-        )
-        )}
-      </Grid.Container>
+      <div className='container'>
+        {
+          postList.map((post: PostData) => (
+            <Post key={post.id} data={post} />
+          ))
+        }
+      </div>
 
       <style jsx>{`
         section {
@@ -34,10 +31,14 @@ export default function Articles ({ posts }: Props) {
           margin-top: 5rem;
           margin-bottom: 5rem;
         }
-      
-        .wrapper {
-          position: relative;
+        
+        .container {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          margin-top: 40px
         }
+        
       `}</style>
     </section>
   )

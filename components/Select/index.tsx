@@ -39,7 +39,8 @@ export default function Select ({ valuesByLang, sortBy }: Props) {
 
       <style jsx>{`
        .holder {
-          width: 8rem;
+          width: 10rem;
+          font-size: 18px;
           background-color: ${colors.secondary};
           color: ${colors.text};
           text-align: center; 
@@ -58,7 +59,7 @@ export default function Select ({ valuesByLang, sortBy }: Props) {
           display: block;
           font-weight: 500;
           font-size: 1.5rem;
-          padding: 1rem;
+          padding: 1.2rem;
           cursor: pointer;
           user-select: none;
         }

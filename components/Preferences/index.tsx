@@ -34,6 +34,7 @@ export default function Preferences ({ children }: Props) {
             font-family: ${fonts.primary};
             color: ${colors.text};
             text-decoration: underline 1px;
+            font-size: 24px;
             font-weight: 600;
           }
         `}</style>

@@ -4,14 +4,15 @@ import { colors, fonts } from 'constants/default'
 export default css`
   menu {
     width: fit-content;
-    margin-left: 3rem;
     font-family: ${fonts.primary};
   }
 
   div {
     display: flex;
+    gap: 5px;
     width: fit-content;
     justify-content: space-around;
+    margin-right: 10px;
   }
 
   a{
@@ -19,15 +20,25 @@ export default css`
   }
 
   .anchor {
+    border-radius: 7px;
     text-decoration: none;
     color: ${colors.text};
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 18px;
     padding: 1rem;
     text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background: ${colors.hover}
+    }
   }
 
   .anchor.active {
     background-color: ${colors.secondary};
+
+    &:hover {
+      background: ${colors.secondary}
+    }
   }
 `

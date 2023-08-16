@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@module-federation/nextjs-mf": "^6.2.1",
-    "@nextui-org/react": "^1.0.0-beta.12",
-    "@types/three": "^0.149.0",
     "gray-matter": "^4.0.3",
     "next": "12.3.0",
     "next-mdx-remote": "^4.1.0",
@@ -23,6 +21,7 @@
     "threeasy": "^0.1.13"
   },
   "devDependencies": {
+    "@types/three": "^0.149.0",
     "@types/node": "18.8.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

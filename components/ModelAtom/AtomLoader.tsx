@@ -1,10 +1,8 @@
 import { useState, memo } from 'react'
 import dynamic from 'next/dynamic'
-import { Loading } from '@nextui-org/react'
 
 const ModelAtom = dynamic(
-  () => import('components/ModelAtom'),
-  { ssr: false }
+  () => import('components/ModelAtom')
 )
 
 function AtomLoader () {
@@ -12,17 +10,17 @@ function AtomLoader () {
 
   return (
     <>
-    {isLoading ? <span> <Loading loadingCss={{ $$loadingSize: '50px', $$loadingBorder: '5px' }} /></span> : ''}
-    <ModelAtom setLoading={setIsLoading} />
-    <style jsx>{`
-      span {
-        width: 100%;
-        height: 400px;
-        display: grid;
-        place-content: center;
-        margin: 0;
-      }
-    `}</style>
+      {isLoading ? <span> Loading... </span> : ''}
+      <ModelAtom setLoading={setIsLoading} />
+      <style jsx>{`
+        span {
+          width: 100%;
+          height: 400px;
+          display: grid;
+          place-content: center;
+          margin: 0;
+        }
+      `}</style>
     </>
   )
 }

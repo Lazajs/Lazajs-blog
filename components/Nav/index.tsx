@@ -30,17 +30,30 @@ export default function Nav () {
           display: flex;
           justify-content: center;
           list-style: none;
-          font-family: ${fonts.secondary}
+          font-family: ${fonts.secondary};
+          width: 300px;
+          margin: auto;
+          gap: 10px
         }
  
         li {
           color: ${colors.text};
-          border-radius: 5px;
+          border-radius: 7px;
           width: 16rem;
           padding: 1rem;
           text-align:center;
           text-decoration: none;
           cursor:pointer;
+          transition: background 100ms;
+          transition: transform 100ms;
+          width: 50%;
+          font-size: 20px;
+          font-weight: 400;
+
+          &:hover {
+            background: ${colors.hover};
+
+          }
         }
 
         .blog {
