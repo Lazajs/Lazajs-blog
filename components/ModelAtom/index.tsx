@@ -43,41 +43,43 @@ export default function AtomThree ({ Loader }) {
       resize()
       window.addEventListener('resize', resize)
 
-      loader.load(MODEL_URL, (gltf) => {
-        gltf.scene.scale.x = 0.38
-        gltf.scene.scale.y = 0.38
-        gltf.scene.scale.z = 0.38
-
-        const toReactColor = ['core_0', 'electron_2_0', 'electron__3_0', 'electron_1_0']
-        const toWhiteColor = ['electron_shell_0', 'electron_shell2_0', 'electron_shell3_0', 'electron_shell3_0']
-        const colorReact = new THREE.Color(0x03cbff)
-        const colorWhite = new THREE.Color(0xffffff)
-
-        gltf.scene.traverse((child) => {
-          if (child.isMesh) {
-            if (toReactColor.includes(child.name)) {
-              child.material.color.set(colorReact)
-            } else if (toWhiteColor.includes(child.name)) {
-              child.material.color.set(colorWhite)
+      if (isLoading) {
+        loader.load(MODEL_URL, (gltf) => {
+          gltf.scene.scale.x = 0.38
+          gltf.scene.scale.y = 0.38
+          gltf.scene.scale.z = 0.38
+  
+          const toReactColor = ['core_0', 'electron_2_0', 'electron__3_0', 'electron_1_0']
+          const toWhiteColor = ['electron_shell_0', 'electron_shell2_0', 'electron_shell3_0', 'electron_shell3_0']
+          const colorReact = new THREE.Color(0x03cbff)
+          const colorWhite = new THREE.Color(0xffffff)
+  
+          gltf.scene.traverse((child) => {
+            if (child.isMesh) {
+              if (toReactColor.includes(child.name)) {
+                child.material.color.set(colorReact)
+              } else if (toWhiteColor.includes(child.name)) {
+                child.material.color.set(colorWhite)
+              }
             }
-          }
-        })
-
-        setScene(gltf.scene)
-        app.scene.add(gltf.scene)
-
-        app.animator.add(() => {
-          gltf.scene.rotation.x += 0.01
-          gltf.scene.rotation.y += 0.01
-        })
-        new OrbitControls(app.camera, app.renderer.domElement).enableZoom = false
-
-        mixer = new THREE.AnimationMixer(gltf.scene)
-        gltf.animations.forEach((clip) => {
-          mixer.clipAction(clip).play()
-        })
-        mixer.update(0.01)
+          })
+  
+          setScene(gltf.scene)
+          app.scene.add(gltf.scene)
+  
+          app.animator.add(() => {
+            gltf.scene.rotation.x += 0.01
+            gltf.scene.rotation.y += 0.01
+          })
+          new OrbitControls(app.camera, app.renderer.domElement).enableZoom = false
+  
+          mixer = new THREE.AnimationMixer(gltf.scene)
+          gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play()
+          })
+          mixer.update(0.01)
       })
+      }
 
       function animate () {
         requestAnimationFrame(animate)
@@ -86,8 +88,10 @@ export default function AtomThree ({ Loader }) {
 
         if (mixer) mixer.update(delta)
       }
-    animate()
-    setIsLoading(false)
+
+      animate()
+      setIsLoading(false)
+
       return () => {
         window.removeEventListener('resize', resize)
       }
