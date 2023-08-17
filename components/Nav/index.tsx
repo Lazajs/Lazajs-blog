@@ -51,8 +51,9 @@ export default function Nav () {
           font-weight: 400;
 
           &:hover {
-            background: ${colors.hover};
-
+            @media (min-width: 768px) {
+              background: ${colors.hover};
+            }
           }
         }
 

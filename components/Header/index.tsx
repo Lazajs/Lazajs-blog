@@ -29,12 +29,12 @@ export default function Header () {
         }
 
         h1 {
-          font-size: 6rem;
+          font-size: 7rem;
           color: ${colors.text}
         }
 
         small {
-          font-size: 1.8rem;
+          font-size: 2rem;
           color: ${colors.subText}
         }
 

@@ -1,14 +1,15 @@
 // @ts-nocheck
-import { useEffect, useState, Dispatch, SetStateAction } from 'react'
+import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import Threeasy from 'threeasy'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStateAction<boolean>>}) {
+export default function AtomThree ({ Loader }) {
   const [loader] = useState(() => new GLTFLoader())
   const [app, setApp] = useState()
   const [scene, setScene] = useState()
+  const [isLoading, setIsLoading] = useState(true)
   const MODEL_URL = '/model/scene.gltf'
 
   useEffect(() => {
@@ -42,7 +43,6 @@ export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStat
       resize()
       window.addEventListener('resize', resize)
 
-      setLoading(false)
       loader.load(MODEL_URL, (gltf) => {
         gltf.scene.scale.x = 0.38
         gltf.scene.scale.y = 0.38
@@ -86,8 +86,8 @@ export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStat
 
         if (mixer) mixer.update(delta)
       }
-      animate()
-
+    animate()
+    setIsLoading(false)
       return () => {
         window.removeEventListener('resize', resize)
       }
@@ -97,6 +97,7 @@ export default function AtomThree ({ setLoading }: {setLoading: Dispatch<SetStat
   return (
     <>
       <div id='atom-container'></div>
+      {isLoading ? <Loader /> : null}
       <style jsx>{`
         #atom-container {
           cursor: grab !important;

@@ -33,8 +33,7 @@ export default function Preferences ({ children }: Props) {
           h2 {
             font-family: ${fonts.primary};
             color: ${colors.text};
-            text-decoration: underline 1px;
-            font-size: 24px;
+            font-size: 3rem;
             font-weight: 600;
           }
         `}</style>

@@ -28,8 +28,8 @@ export default function Articles ({ posts }: Props) {
       <style jsx>{`
         section {
           font-family: ${fonts.secondary};
-          margin-top: 5rem;
-          margin-bottom: 5rem;
+          margin-top: 8rem;
+          margin-bottom: 6rem;
         }
         
         .container {

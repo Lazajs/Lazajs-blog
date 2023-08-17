@@ -34,6 +34,9 @@
         ],
         "@typescript-eslint/no-explicit-any": "warn",
         "no-new": "off",
-        "react-hooks/exhaustive-deps": "off"
+        "react-hooks/exhaustive-deps": "off",
+    },
+    "globals": {
+        "React": "readonly"
     }
 }

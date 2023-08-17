@@ -12,13 +12,13 @@ const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
         <Head>
           <title> Blog - lazajs </title>
         </Head>
-        <div className='animation'>
+        <section>
           <Header />
           <div className='atom-wrapper'>
             <AtomLoader/>
           </div>
           <Articles posts={posts} />
-        </div>
+        </section>
         <style jsx>{`
           .atom-wrapper {
             min-height: 300px;
