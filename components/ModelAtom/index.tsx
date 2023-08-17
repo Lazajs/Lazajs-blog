@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import Threeasy from 'threeasy'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export default function AtomThree ({ Loader }) {
   const [loader] = useState(() => new GLTFLoader())
@@ -68,16 +67,15 @@ export default function AtomThree ({ Loader }) {
           app.scene.add(gltf.scene)
   
           app.animator.add(() => {
-            gltf.scene.rotation.x += 0.01
-            gltf.scene.rotation.y += 0.01
+            gltf.scene.rotation.x += 0.007
+            gltf.scene.rotation.y += 0.007
           })
-          new OrbitControls(app.camera, app.renderer.domElement).enableZoom = false
-  
+          
           mixer = new THREE.AnimationMixer(gltf.scene)
           gltf.animations.forEach((clip) => {
             mixer.clipAction(clip).play()
           })
-          mixer.update(0.01)
+          mixer.update(0.007)
       })
       }
 
@@ -104,7 +102,7 @@ export default function AtomThree ({ Loader }) {
       {isLoading ? <Loader /> : null}
       <style jsx>{`
         #atom-container {
-          cursor: grab !important;
+          cursor: normal;
           max-width: 400px;
           height: 400px;
           width: 100%;
