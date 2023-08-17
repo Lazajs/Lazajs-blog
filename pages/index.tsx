@@ -21,8 +21,10 @@ const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
         </section>
         <style jsx>{`
           .atom-wrapper {
-            min-height: 300px;
-            min-width: 300px
+            max-width: 400px;
+            margin: auto;
+            height: 400px;
+            width: 100%;
           }
         `}</style>
       </>

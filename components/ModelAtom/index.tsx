@@ -106,15 +106,11 @@ export default function AtomThree ({ Loader }) {
         #atom-container {
           cursor: grab !important;
           max-width: 400px;
-          height: 300px;
+          height: 400px;
           width: 100%;
           position: relative;
           margin: auto;
-
-          @media (min-width: 1024px) {
-            max-width: 600px;
-            height: 400px;
-          }
+          background: transparent;
         }
 
         canvas {

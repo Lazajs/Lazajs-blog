@@ -5,13 +5,15 @@ import Highlight from 'components/Higlight'
 export default function Header () {
   const text = useI18n('header')
 
+  let shown = text.text[Math.floor(Math.random()*text.text.length)]
+
   return (
     <header>
       <span>
         <h1>laza<Highlight>js</Highlight></h1>
         <small><Highlight>L</Highlight>ázaro Sánchez</small>
       </span>
-      <p>{text.text}</p>
+      <p>{shown}</p>
 
       <style jsx>{`
         header {
@@ -43,7 +45,20 @@ export default function Header () {
           text-align: center;
           margin: 0;
           font-family: ${fonts.secondary};
-          color: ${colors.text}
+          color: ${colors.text};
+          animation: pulsate 2s ease-in-out infinite;
+        }
+
+        @keyframes pulsate {
+        0% {
+          transform: scale(0.95);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(0.95);
+        }
         }
       `}</style>
     </header>
