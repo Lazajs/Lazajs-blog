@@ -25,6 +25,7 @@ const Home: NextPage<{posts: PostData[]}> = ({ posts }) => {
             margin: auto;
             height: 400px;
             width: 100%;
+            background-color: transparent;
           }
         `}</style>
       </>

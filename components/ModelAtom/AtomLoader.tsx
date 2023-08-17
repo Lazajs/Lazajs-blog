@@ -2,7 +2,7 @@ import { memo, lazy, Suspense } from 'react'
 import Spinner from 'components/Spinner'
 
 const ModelAtom = lazy(
-  () => import('components/ModelAtom')
+  () => import('components/ModelAtom'),
 )
 
 function AtomLoader () {

@@ -1,11 +1,12 @@
 import { colors, fonts } from 'constants/default'
 import useI18n from 'hooks/useI18n'
 import Highlight from 'components/Higlight'
+import { useMemo } from 'react'
 
 export default function Header () {
   const text = useI18n('header')
 
-  let shown = text.text[Math.floor(Math.random()*text.text.length)]
+  const shown = useMemo(() => text.text[Math.floor(Math.random()*text.text.length)], [text.text])
 
   return (
     <header>
@@ -13,7 +14,7 @@ export default function Header () {
         <h1>laza<Highlight>js</Highlight></h1>
         <small><Highlight>L</Highlight>ázaro Sánchez</small>
       </span>
-      <p>{shown}</p>
+      <p>{shown ? shown : ''}</p>
 
       <style jsx>{`
         header {

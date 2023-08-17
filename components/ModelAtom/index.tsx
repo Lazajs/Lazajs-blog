@@ -110,13 +110,14 @@ export default function AtomThree ({ Loader }) {
           width: 100%;
           position: relative;
           margin: auto;
-          background: transparent;
+          background-color: transparent;
         }
 
         canvas {
           position: absolute;
           top:0;
           left: 0;
+          background-color:transparent;
         }
       `}</style>
     </>
