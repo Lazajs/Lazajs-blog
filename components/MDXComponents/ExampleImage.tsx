@@ -12,7 +12,7 @@ export default function ExampleImage ({ src, alt, height, width, description, sc
       <style jsx>{`
         .image-container {
           display: block;
-          margin: 2rem auto;
+          margin: 3rem auto;
           width: ${width}px;
           height: ${height}px;
           position: relative;
@@ -21,7 +21,7 @@ export default function ExampleImage ({ src, alt, height, width, description, sc
         @media (min-width: 768px) {
           .image-container {
             transform: scale(1.2);
-            margin: 3rem auto;
+            margin: 4rem auto;
           }
         }
 

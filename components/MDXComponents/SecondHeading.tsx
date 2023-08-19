@@ -10,7 +10,7 @@ export default function SecondHeading ({ children }: Children) {
       <style jsx>{`
         h2 {
           font-size: 2.2rem;
-          margin-top: 3rem;
+          margin-top: 4rem;
           margin-bottom: .5rem;
         }
       `}</style>

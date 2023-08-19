@@ -81,12 +81,10 @@
   },
   "postnav": {
     "en-us": {
-      "github": "Any error?",
-      "edit": " Edit on Github"
+      "github": "Any error?"
     },
     "es-ar": {
-      "github": "¿Algún error?",
-      "edit": " Edítalo en Github"
+      "github": "¿Algún error?"
     }
   },
   "article": {

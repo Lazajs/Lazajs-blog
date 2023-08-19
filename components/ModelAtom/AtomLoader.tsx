@@ -1,16 +1,13 @@
-import { memo, lazy, Suspense } from 'react'
+import { memo } from 'react'
 import Spinner from 'components/Spinner'
+import dynamic from 'next/dynamic'
 
-const ModelAtom = lazy(
-  () => import('components/ModelAtom'),
-)
+const ModelAtom = dynamic(()=> import('components/ModelAtom'), {ssr: false, loading: Spinner})
 
 function AtomLoader () {
   return (
     <>
-      <Suspense fallback={<Spinner />}>
-        <ModelAtom Loader={Spinner} />
-      </Suspense>
+      <ModelAtom Loader={Spinner} />
       <style jsx>{`
         span {
           width: 100%;

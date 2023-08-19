@@ -3,6 +3,7 @@ import type { PostData } from 'types'
 import style from 'styles/PostNav.style'
 import useI18n from 'hooks/useI18n'
 import { useRouter } from 'next/router'
+import {VscGithub} from 'react-icons/vsc'
 
 type Props = {data: PostData}
 
@@ -16,11 +17,18 @@ export default function PostNav ({ data } : Props) {
   <>
     <nav className='nav'>
       <Back size={'50px'} cursor={'pointer'} onClick={() => push('/')}/>
-      <b>{text.github}<a href="https://github.com/Lazajs/Lazajs-blog/tree/main/data/" target={'_blank'} rel="noreferrer">{text.edit}</a></b>
+      <b className='link'>
+        <p>{text.github}</p>
+        <a href="https://github.com/Lazajs/Lazajs-blog/tree/main/data/" target={'_blank'} rel="noreferrer">{
+          <VscGithub size={30} />}
+        </a>
+      </b>
     </nav>
-        <h1>{title}</h1>
-        <h4>{description}</h4>
-        <small>{shownDate}</small>
+    <div className='title'>
+      <h1>{title}</h1>
+      <h4>{description}</h4>
+      <small>{shownDate}</small>
+    </div>
       <style jsx>{style}</style>
   </>
   )

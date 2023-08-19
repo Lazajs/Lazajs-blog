@@ -16,8 +16,8 @@ export default css`
     text-align: center;
   }
         
-  h1 {
-    margin-top: 2rem;
+  .title {
+    margin: 4rem 0;
   }
 
   h4 {
@@ -25,13 +25,19 @@ export default css`
     margin-bottom: 2rem;
   }
 
-  b a {
-    text-decoration: underline;
-    font-weight: 500;
-    font-size: 1.3rem; 
+  .link {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
+    gap: 10px;
+    white-space:nowrap;
+    margin-right: 43px;
   }
 
   b,a {
+    width: 30px;
+    height: 30px;
     color: ${colors.subText};
   }
 
