@@ -11,5 +11,4 @@ export default css`
   article > h1 {
     color: black;
   }
-
 `

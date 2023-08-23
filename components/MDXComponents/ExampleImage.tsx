@@ -27,13 +27,13 @@ export default function ExampleImage ({ src, alt, height, width, description, sc
 
         @media (min-width: 1024px) {
           .image-container {
-            ${scaleBy > 1 ? 'transform: scale(1.3); margin: 4rem auto' : ''}
+            ${scaleBy > 1 ? 'transform: scale(1.3); margin: 6rem auto' : ''}
           }
         }
         
         @media (min-width: 1280px) {
           .image-container {
-           ${scaleBy > 2 ? 'transform: scale(1.8); margin: 6rem auto' : ''}
+           ${scaleBy > 2 ? 'transform: scale(1.8); margin: 8rem auto' : ''}
           }
         }
 
