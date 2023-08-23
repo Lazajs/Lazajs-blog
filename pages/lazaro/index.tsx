@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import H from 'components/Higlight'
 import MyStack from 'components/MyStack'
+import AnimatedElements from 'components/AnimatedElements'
 
 export default function Lazaro () {
   const getAge = (birth: string) => { // YYYY-MM-DD
@@ -30,7 +31,7 @@ export default function Lazaro () {
       <section className='container'>
         <header>
           <div className="me">
-            <Image width={200} height={200} className='me' src={'/white.png'} alt='white' />
+            <Image width={200} height={200} className='me' src={'/yop.jpg'} alt='white' />
           </div>
           <span className='info'>
             <h1><H>L</H>áza<H>r</H>o S<H>ánc</H>hez</h1>
@@ -46,11 +47,13 @@ export default function Lazaro () {
           </p>
         </div>
 
-        <MyStack />
+        <AnimatedElements>
+          <MyStack />
+        </AnimatedElements>
 
-        <article>
+        {/* <article>
           <h2>Experiencia</h2>
-        </article>
+        </article> */}
       </section>
       <style jsx>{style}</style>
     </>

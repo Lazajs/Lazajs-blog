@@ -64,3 +64,22 @@ body::-webkit-scrollbar-thumb {
   background-color: #000;
 }
 
+/* SCROLL ANIMATION */
+.wrapper > * {
+  opacity: 0;
+  filter: blur('10px');
+  transform: translateY(6px);
+  transition: all 1s;
+}
+
+.wrapper .show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion) {
+  .wrapper > * {
+    transition: none;
+  }
+}

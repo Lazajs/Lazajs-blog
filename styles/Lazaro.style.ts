@@ -12,18 +12,19 @@ export default css`
   }
   
   .me {
-    border-radius: 50%;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     height: fit-content;
+    border-radius: 7px;
   }
 
   header {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
     align-items: center;
     height: fit-content;
+    margin: 20px auto;
   }
   
   .info {
@@ -49,7 +50,7 @@ export default css`
   .description p {
     color: ${colors.text};
     font-size: 2rem;
-    margin-top: 30px;
+    margin-top: 40px;
     line-break: loose;
     font-weight: 500;
   }
