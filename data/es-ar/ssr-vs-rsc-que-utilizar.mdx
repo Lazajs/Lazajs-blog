@@ -1,0 +1,182 @@
+---
+title: '¿SSR o RCS? Qué utilizar'
+description: 'Acercamiento a los 2 patrones de renderizado más populares.'
+date: '2023-08-23'
+category: 'react'
+id: 003
+---
+
+El desarrollo web se ha conformado de una manera mucho más homogénea en los últimos años, haciendo que el front-end ahora sea formado casi en su totalidad del lado del servidor, algo que antes era impensado. Estos cambios resultaron en nuevos patrones de renderizado, sobre todo en React.
+
+## Server Side Rendering (SSR)
+
+Anteriormente, en la manera tradicional de renderizar una aplicación de React, el servidor devolvía un paquete de Javascript que se encargaba de renderizar la aplicación al ser ejecutada en el navegador. Los problemas conocidos de esta estrategia siempre fueron los mismos: SEO, rendimiento, tiempo de carga, e incluso más.
+
+<ExampleImage width={320} height={140} scaleBy={3} src={'/assets/posts/003/ssr.png'} alt='Server Side rendering' description='Server side rendering' />
+
+Cuando hablamos de Server Side Rendering en React, lo que ocurre es un proceso de 2 etapas:
+
+### Renderizado
+
+En este caso, el renderizado ocurre en el servidor.
+
+Al momento de emitir una petición al servidor, este se encarga de crear un arbol de elementos HTML que el cliente recibirá directamente, sin necesidad de tener que hacerlo en momento de ejecución. Este HTML no tiene interactividad, de hecho, la mayoría de veces es solo una cadena de texto que contiene el maquetado de lo que se verá en el navegador como HTML.
+
+```js
+  import { renderToString } from 'react-dom/server';
+
+  app.use('/', (request, response) => {
+    const html = renderToString(<App />);
+    response.send(html);
+  });
+```
+
+El momento previo al renderizado es el momento perfecto para realizar petición de datos, como hacer una petición a la base de datos y crear el HTML en base a ello aprovechando que ya estamos en el servidor.
+
+### Hidratado
+
+Una vez que el cliente recibe el HTML solo queda un problema: la interactividad.
+
+Para lograr que el HTML recibido pueda ser manipulado por Javascript se produce un proceso llamado “hidratación” el cual no es más que agregar eventos, funciones y la interactividad necesaria (React) al HTML recibido.
+
+```js
+  import { hydrateRoot } from 'react-dom/client';
+
+  const domNode = document.getElementById('root');
+  const root = hydrateRoot(domNode, reactNode);
+```
+
+## React Server Components (RSC)
+
+Esta estrategia permite colaborar al servidor y al cliente en el renderizado, pudiendo crear componentes que sean solo del servidor y otros de cliente, tenindo su respectiva interactividad. En términos simples, permite que el servidor y el cliente hagan lo que mejor saben hacer.
+
+### Las ventajas principales de usar un componente del servidor son:
+
+- El servidor tiene un acceso mucho más directo a la informacion (es decir, base de datos)
+- El servidor puede hacer uso de bibliotecas “pesadas” para generar el maquetado sin necesidad de hacer que el cliente descargue esta información en cada petición.
+- El cliente solo se encargará de renderizar los elementos interactivos, y ya tendrá disponible los datos o props que necesita.
+
+### ¿No es esto Server Side Rendering?
+
+A diferencia de React Server Components, el SSR no diferencia aquellos componentes interactivos de aquellos que no lo son, solo se encarga de simular un entorno para renderizar el maquetado en una cadena de texto para evitar este paso en el cliente. 
+
+Es posible combinar estos dos de tal forma que se complementen, pero es necesario entender que son conceptos que no están relacionados entre sí.
+
+### ¿Como funciona realmente un RSC?
+
+El funcionamiento en profundidad de un RSC puede llevar unos 3 artículos detallados sobre el tema, pero se puede crear una idea resumida para poder comprender su funcionamiento.
+
+El principal responsable de una aplicación que utiliza este método es el empaquetador, quien es el encargado desde el principio de poder diferenciar aquellos componentes de servidor y aquellos del cliente.
+
+<ExampleImage width={320} height={320} scaleBy={1} src={'/assets/posts/003/rsc.png'} alt='React Server component tree' description='React Server component tree' />
+
+Existen restricciones a la hora de utilizar RSC, como por ejemplo, no pueden pasarse algunos tipos de props (explicado más adelante), y el hecho de no poder importar componentes de servidor dentro de componentes de cliente, pero si viceversa. Esto se debe a que estos componentes pueden tener datos sensibles o código que directamente no corre en el navegador.
+
+Pero entonces, ¿Cómo podemos hacer que un RSC sea hijo de un componente en el cliente? Bueno, el hecho de no poder importar uno dentro del otro no implica no poder usar técnicas como la composición:
+
+```js 
+  // ClientComponent.client.jsx
+  export default function ClientComponent({ children }) {
+  return (
+  <div>
+  <h1>Hello from client land</h1>
+  {children}
+  </div>
+  )
+  }
+
+  // ServerComponent.server.jsx
+  export default function ServerComponent() {
+  return <span>Hello from server land</span>
+  }
+
+  // OuterServerComponent.server.jsx
+  // OuterServerComponent puede instanciar ambos, cliente y server
+  // components. Pasamos <ServerComponent /> como hijo al 
+  // ClientComponent.
+  import ClientComponent from './ClientComponent.client'
+  import ServerComponent from './ServerComponent.server'
+  export default function OuterServerComponent() {
+  return (
+  <ClientComponent>
+    <ServerComponent />
+  </ClientComponent>
+)
+}
+```
+
+### Ciclo de vida de un árbol RSC:
+
+#### El servidor recibe una petición para renderizar:
+
+Aquí es donde el servidor crea un componente "root" que siempre será un RSC y de él descenderan aquellos que sean o no sean de su mismo tipo.
+
+#### El servidor serializa el componente principal en un JSON:
+
+En este momento se crea un árbol JSON con un primer nivel que corresponde a el componente principal, y de él comienzan a descender los demás.  Cuando se encuentra un lugar donde debería ir un componente del cliente, se deja un “hueco” para luego ser rellenado en el proceso de reconstrucción en el cliente.
+
+```js
+  // Elemento de React para <div>oh my</div>
+  React.createElement("div", { title: "oh my" })
+    {
+      $$typeof: Symbol(react.element),
+      type: "div",
+      props: { title: "oh my" },
+      ...
+    }
+
+  // Elemento de React para <MyComponent>oh my</MyComponent>
+  function MyComponent({children}) {
+    return <div>{children}</div>;
+  }
+
+  React.createElement(MyComponent, { children: "oh my" });
+    {
+      $$typeof: Symbol(react.element),
+      type: MyComponent  // Referencia a función MyComponent
+      props: { children: "oh my" },
+      ...
+    }
+```
+
+No es realmente un hueco lo que se deja al momento de encontrarse con un componente de cliente, sino un espacio que contendría las props y una referencia al módulo donde está disponible este componente y luego ser renderizado e hidratado en el navegador (acá es cuando el empaquetador es importante)
+
+```js
+  {
+  // El elemento ClientComponent representado por una referencia al módulo
+  $$typeof: Symbol(react.element),
+    type: {
+      $$typeof: Symbol(react.module.reference),
+      name: "default",
+      filename: "./src/ClientComponent.client.js"
+    },
+    props: {
+
+  // children es pasado a ClientComponent, el cual es <ServerComponent />
+  children: {
+  // ServerComponent es renderizado directamente en HTML
+  // observar como no hay referencia al ServerComponent,
+  // se renderiza directamente el 'span'.
+    $$typeof: Symbol(react.element),
+        type: "span",
+        props: {
+          children: "Hello from server land"
+        }
+      }
+    }
+  }
+```
+
+Como este paso requiere de serializar el componente en información como un JSON se utilizan funciones especiales de React para llevarlo a cabo, pero no todos los datos pueden ser pasadas como props debido a que, por ejemplo, una funcion no es posible de serializar como JSON.
+
+#### Se reconstruye la información
+
+El navegador recibe el JSON desde el servidor y ahora comienza a reconstruir el árbol de componentes a ser renderizado en el navegador. Cuando encuentra un elemento donde el “type” se refiere a un módulo, se reemplazara con el componente real de cliente.
+
+<ExampleImage width={320} height={320} scaleBy={2} src={'/assets/posts/003/placeholders-rsc.png'} alt='Client component' description='Client component placeholder' />
+
+## Conclusión
+
+Esto es un simple acercamiento al funcionamiento de cada una de estas técnicas, y es fundamental entender cada una a bajo nivel para poder pensar mejor en el rendimiento y calidad de nuestro software.
+
+Siempre es posible ahondar mucho mas en tecnicismos sobre su funcionamiento y recomiendo mucho hacerlo para despejar todas las posibles dudas que este artículo haya dejado sueltas.
