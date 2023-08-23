@@ -16,7 +16,6 @@
 /* global font family and background color declared here */
 html, 
 body {
-  overflow-x: hidden;
   padding: 0;
   margin: 0;
   background-color:#20252C ;
@@ -30,6 +29,7 @@ html {
 
 body {
   font-size: 16px; 
+  overflow-x: hidden;
   font-size: 1.6rem; 
   line-height: 1.5;
   background-image: url('/atom-background.png');
