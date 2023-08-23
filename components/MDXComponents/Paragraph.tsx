@@ -15,10 +15,6 @@ export default function Paragraph ({ children }: Children) {
           color: ${colors.paragraphText}; 
           margin: 2rem 0;
         }
-
-        p::first-letter {
-          margin-left: 1rem;
-        }
       `}</style>
     </>
   )
