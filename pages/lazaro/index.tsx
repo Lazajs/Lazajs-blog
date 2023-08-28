@@ -16,6 +16,41 @@ const EXPERIENCE = [
   }
 ]
 
+const PROJECTS = [
+  {
+    name: 'Awericana (Proyecto en equipo)',
+    date: 'Abril 2023',
+    url: '#',
+    description: 'E-Commerce de compra y venta de ropa de segunda mano',
+    repo: 'https://github.com/No-Country/c11-29-ft-node-react-Awericana',
+    stack: ['NextJS', 'Tailwind', 'ExpressJS', 'Typescript']
+  },
+  {
+    name: 'Managym (Proyecto en equipo)',
+    date: 'Junio 2023',
+    url: 'https://managym.vercel.app/',
+    description: 'MANAGYM es una aplicación web desarrollada para apoyar en la gestión de un gimnasio. El principal enfoque de MANAGYM es apoyar en los procesos de transformación digital de los gimnasios mediante digitalización de procesos.',
+    repo: 'https://github.com/No-Country/s9-14-ft-node-react',
+    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript']
+  },
+  {
+    name: 'Pokefy',
+    date: 'Febrero 2023',
+    url: 'https://pokefy.vercel.app/',
+    description: 'Pokefy es un buscador de pokemones que permite visualizar información de cada uno e indexarlos! Hecho con PokeAPI.',
+    repo: 'https://github.com/Lazajs/POKEFY',
+    stack: ['React', 'Redux', 'styled-components']
+  },
+  {
+    name: 'Nopiqui',
+    date: 'Febrero 2022',
+    url: 'https://pokefy.vercel.app/',
+    description: 'Pokefy es un buscador de pokemones que permite visualizar información de cada uno e indexarlos! Hecho con PokeAPI.',
+    repo: 'https://github.com/Lazajs/Nopiqui',
+    stack: ['React', 'SASS', 'DraftJS', 'Typescript', 'Express', 'MongoDB']
+  }
+]
+
 export default function Lazaro () {
   const getAge = (birth: string) => { // YYYY-MM-DD
     const actualDate = new Date()
@@ -91,7 +126,48 @@ export default function Lazaro () {
             </AnimatedElements>
         </section>
 
+      <section className='projects experience'>
+        <h2>Proyectos</h2>
+        
+        <AnimatedElements>
+          {
+            PROJECTS.map(project => {
+              return (
+                <article className='single'>
+                  <span className='data'>
+                      <a href={project.url} target='_blank'><h3><H>{project.name}</H></h3></a>
+                      <small>{project.date}</small>
+                    </span>
+                    <p>{project.description}</p>
+                    <span className='stack'>
+                      <b>Stack:</b>
+                      {
+                        project.stack.map(tech => {
+                          return (
+                            <p key={tech}>{tech}</p>
+                          )
+                        })
+                      }
+                    </span>
+                    
+                    <span>
+                      <a href={project.repo} target='_blank' className='repo'>
+                        <AiFillGithub color='#fff' size={50} />
+                      </a>
+                    </span>
+                </article>
+              )
+            })
+          }
+        </AnimatedElements>
+
       </section>
+
+      </section>
+
+      <footer>
+        <p>With ❤️ by Lazaro</p>
+      </footer>
       <style jsx>{style}</style>
     </>
   )

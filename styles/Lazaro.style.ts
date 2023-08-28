@@ -5,6 +5,7 @@ export default css`
   .container {
     margin-top: 4rem;
     min-height: 100vh;
+    margin-bottom: 100px;
   }
 
   .container article {
@@ -72,7 +73,7 @@ export default css`
     }
   }
 
-  .experience {
+  .experience, .projects {
     margin-top: 40px;
     color: ${colors.text};
     height: fit-content;
@@ -104,6 +105,10 @@ export default css`
     white-space: nowrap;
   }
 
+  .projects h3 {
+    white-space: normal !important;
+  }
+
   .single .data {
     display: flex;
     flex-wrap: wrap;
@@ -112,9 +117,39 @@ export default css`
     margin-bottom: 10px;
   }
 
+  a {
+    text-decoration: underline white 1px;
+  }
+
+  .data .repo {
+    color: ${colors.subText};
+    text-decoration: none;
+    margin: 20px 0;
+  }
+
+ .stack {
+    display: flex;
+    gap: 10px;
+    color: ${colors.subText};
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
   .data small {
     font-size: 14px;
     color: ${colors.subText};
+  }
+
+  .projects {
+    margin-top: 100px;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${colors.text};
+    font-size: 2rem;
   }
 
   @media (min-width:768px) {
