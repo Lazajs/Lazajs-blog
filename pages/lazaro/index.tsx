@@ -5,75 +5,30 @@ import H from 'components/Higlight'
 import MyStack from 'components/MyStack'
 import AnimatedElements from 'components/AnimatedElements'
 import {AiFillGithub, AiFillLinkedin, AiOutlineMail} from 'react-icons/ai'
+import {PROJECTS, EXPERIENCE} from 'constants/information'
+import { getAge } from 'lib/getAge'
+import { useRouter } from 'next/router'
+import { Popup } from 'components/Popup'
+import { OpinionForm } from 'components/OpinionForm'
 
-const EXPERIENCE = [
-  {
-    name: 'No Country',
-    from: 'Abril 2023',
-    to: 'Ocasionalmente',
-    role: ['Front-end', 'Team Leader'],
-    description: 'A lo largo de tres proyectos desempeñé el rol de Front-end con equipos diferentes, desarrollando proyectos como "Awericana", "Managym" y "Wave". También estuve a cargo de dos equipos representando al cliente como Team Leader.'
-  }
-]
+// import connect from 'db/connect'
+// import {Opinion} from 'db/models/Opinion'
 
-const PROJECTS = [
-  {
-    name: 'Awericana (Proyecto en equipo)',
-    date: 'Abril 2023',
-    url: '#',
-    description: 'E-Commerce de compra y venta de ropa de segunda mano',
-    repo: 'https://github.com/No-Country/c11-29-ft-node-react-Awericana',
-    stack: ['NextJS', 'Tailwind', 'ExpressJS', 'Typescript']
-  },
-  {
-    name: 'Managym (Proyecto en equipo)',
-    date: 'Junio 2023',
-    url: 'https://managym.vercel.app/',
-    description: 'MANAGYM es una aplicación web desarrollada para apoyar en la gestión de un gimnasio. El principal enfoque de MANAGYM es apoyar en los procesos de transformación digital de los gimnasios mediante digitalización de procesos.',
-    repo: 'https://github.com/No-Country/s9-14-ft-node-react',
-    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript']
-  },
-  {
-    name: 'Pokefy',
-    date: 'Febrero 2023',
-    url: 'https://pokefy.vercel.app/',
-    description: 'Pokefy es un buscador de pokemones que permite visualizar información de cada uno e indexarlos! Hecho con PokeAPI.',
-    repo: 'https://github.com/Lazajs/POKEFY',
-    stack: ['React', 'Redux', 'styled-components']
-  },
-  {
-    name: 'Nopiqui',
-    date: 'Febrero 2022',
-    url: 'https://pokefy.vercel.app/',
-    description: 'Pokefy es un buscador de pokemones que permite visualizar información de cada uno e indexarlos! Hecho con PokeAPI.',
-    repo: 'https://github.com/Lazajs/Nopiqui',
-    stack: ['React', 'SASS', 'DraftJS', 'Typescript', 'Express', 'MongoDB']
-  }
-]
+interface Opinion {
+  name?: string,
+  content: string
+}
 
-export default function Lazaro () {
-  const getAge = (birth: string) => { // YYYY-MM-DD
-    const actualDate = new Date()
-    const birthDate = new Date(birth)
-
-    const age = actualDate.getFullYear() - birthDate.getFullYear()
-
-    if (
-      birthDate.getMonth() > actualDate.getMonth() ||
-      (birthDate.getMonth() === actualDate.getMonth() &&
-        birthDate.getDate() > actualDate.getDate()) 
-    ) {
-      return age - 1
-    }
-
-    return age
-  }
+export default function Lazaro ({opinions}: {opinions?: Opinion[]}) {
+  const {query} = useRouter()
 
   return (
     <>
       <Head>
         <title> Portfolio - lazajs </title>
+        <meta name="description" content="Lazaro Sanchez - Web developer, passionate about Frontend and Python" />
       </Head>
+
       <section className='container'>
         <header>
           <div className="me">
@@ -133,7 +88,7 @@ export default function Lazaro () {
           {
             PROJECTS.map(project => {
               return (
-                <article className='single'>
+                <article key={project.name} className='single'>
                   <span className='data'>
                       <a href={project.url} target='_blank'><h3><H>{project.name}</H></h3></a>
                       <small>{project.date}</small>
@@ -168,7 +123,30 @@ export default function Lazaro () {
       <footer>
         <p>With ❤️ by Lazaro</p>
       </footer>
+
+      {
+        query?.opinion ? (
+          <Popup>
+            <OpinionForm />
+          </Popup>
+        )
+        : null
+        }
       <style jsx>{style}</style>
     </>
   )
 }
+
+// export const getServerSideProps = async () => {
+//   const connection = await connect()
+
+//   const opinions = {name: 'Hola', content: 'Holaaaaa chay'}
+
+//   connection && await connection.disconnect()
+
+//   return {
+//     props: {
+//       opinions
+//     }
+//   }
+// }
