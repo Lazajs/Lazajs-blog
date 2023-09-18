@@ -20,3 +20,8 @@ export interface SVGProps {
 export type Options = string[]
 
 export type Children = {children?: ReactNode}
+
+interface IOpinion {
+  name?: string,
+  content: string
+}

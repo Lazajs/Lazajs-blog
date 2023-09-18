@@ -36,8 +36,14 @@ body {
   background-position: center;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
   width:6px;
+}
+
+body::-webkit-scrollbar:horizontal,
+*::-webkit-scrollbar:horizontal {
+  height: 6px;
 }
 
 * {
@@ -45,11 +51,14 @@ body::-webkit-scrollbar {
   scrollbar-color: #fffa transparent;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track, 
+*::-webkit-scrollbar-track {
+  width: 20px;
   background-color: transparent;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
   background-color: #fffa;
   border-radius: 20px;
 }

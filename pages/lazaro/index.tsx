@@ -10,17 +10,14 @@ import { getAge } from 'lib/getAge'
 import { useRouter } from 'next/router'
 import { Popup } from 'components/Popup'
 import { OpinionForm } from 'components/OpinionForm'
+import connect from 'db/connect'
+import {Opinion} from 'db/models/Opinion'
+import { type IOpinion } from 'types'
+import { OpinionList } from 'components/OpinionList'
 
-// import connect from 'db/connect'
-// import {Opinion} from 'db/models/Opinion'
-
-interface Opinion {
-  name?: string,
-  content: string
-}
-
-export default function Lazaro ({opinions}: {opinions?: Opinion[]}) {
+export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
   const {query} = useRouter()
+  console.log(opinions)
 
   return (
     <>
@@ -81,6 +78,8 @@ export default function Lazaro ({opinions}: {opinions?: Opinion[]}) {
             </AnimatedElements>
         </section>
 
+      <OpinionList opinions={opinions} />
+
       <section className='projects experience'>
         <h2>Proyectos</h2>
         
@@ -137,16 +136,35 @@ export default function Lazaro ({opinions}: {opinions?: Opinion[]}) {
   )
 }
 
-// export const getServerSideProps = async () => {
-//   const connection = await connect()
+export const getStaticProps = async () => {
+  const connection = await connect()
+  
+  try {
+    const allOpinions = await Opinion.find({})
+    const opinions = allOpinions.map((single)=> {
+      return {
+        content: single.content,
+        name: single.name
+      }
+    })
 
-//   const opinions = {name: 'Hola', content: 'Holaaaaa chay'}
+    connection && await connection.disconnect()
 
-//   connection && await connection.disconnect()
+    return {
+      props: {
+        opinions
+      }
+    }
+  } catch(e) {
+    console.log(e)
+  }
 
-//   return {
-//     props: {
-//       opinions
-//     }
-//   }
-// }
+  connection && await connection.disconnect()
+  return {
+    props: {
+      opinions: []
+    }
+  }
+
+
+}
