@@ -28,7 +28,7 @@ export const PROJECTS = [
   {
     name: 'Awericana (Proyecto en equipo)',
     date: 'Abril 2023',
-    url: '#',
+    url: 'https://awericana.vercel.app/',
     description: 'E-Commerce de compra y venta de ropa de segunda mano',
     repo: 'https://github.com/No-Country/c11-29-ft-node-react-Awericana',
     stack: ['NextJS', 'Tailwind', 'ExpressJS', 'Typescript']
