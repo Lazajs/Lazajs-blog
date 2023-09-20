@@ -71,6 +71,10 @@ export default css`
       margin-left: 10px;
       margin-right: 10px;
     }
+
+    &:nth-child(4) {
+      margin-left: 10px;
+    }
   }
 
   .experience, .projects {

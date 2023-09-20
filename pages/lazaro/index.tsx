@@ -4,8 +4,8 @@ import Image from 'next/image'
 import H from 'components/Higlight'
 import MyStack from 'components/MyStack'
 import AnimatedElements from 'components/AnimatedElements'
-import {AiFillGithub, AiFillLinkedin, AiOutlineMail} from 'react-icons/ai'
-import {PROJECTS, EXPERIENCE} from 'constants/information'
+import {AiFillGithub, AiFillLinkedin, AiOutlineMail, AiOutlineDownload} from 'react-icons/ai'
+import { EXPERIENCE} from 'constants/information'
 import { getAge } from 'lib/getAge'
 import { useRouter } from 'next/router'
 import { Popup } from 'components/Popup'
@@ -14,10 +14,10 @@ import connect from 'db/connect'
 import {Opinion} from 'db/models/Opinion'
 import { type IOpinion } from 'types'
 import { OpinionList } from 'components/OpinionList'
+import { MyProjects } from 'components/MyProjects'
 
 export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
-  const {query} = useRouter()
-  console.log(opinions)
+  const { query } = useRouter()
 
   return (
     <>
@@ -43,6 +43,9 @@ export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
               </a>
               <a href="mailto:contact@lazajs.com" title='contact@lazajs.com'>
                 <AiOutlineMail size={40} />
+              </a>
+              <a href="/assets/Curriculum.pdf" download='CV-Lazaro-Sanchez'>
+                <AiOutlineDownload size={40} />
               </a>
             </span>
           </span> 
@@ -78,44 +81,12 @@ export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
             </AnimatedElements>
         </section>
 
-      <OpinionList opinions={opinions} />
+        <OpinionList opinions={opinions} />
 
-      <section className='projects experience'>
-        <h2>Proyectos</h2>
-        
-        <AnimatedElements>
-          {
-            PROJECTS.map(project => {
-              return (
-                <article key={project.name} className='single'>
-                  <span className='data'>
-                      <a href={project.url} target='_blank'><h3><H>{project.name}</H></h3></a>
-                      <small>{project.date}</small>
-                    </span>
-                    <p>{project.description}</p>
-                    <span className='stack'>
-                      <b>Stack:</b>
-                      {
-                        project.stack.map(tech => {
-                          return (
-                            <p key={tech}>{tech}</p>
-                          )
-                        })
-                      }
-                    </span>
-                    
-                    <span>
-                      <a href={project.repo} target='_blank' className='repo'>
-                        <AiFillGithub color='#fff' size={50} />
-                      </a>
-                    </span>
-                </article>
-              )
-            })
-          }
-        </AnimatedElements>
-
-      </section>
+        <section className='projects experience'>
+          <h2>Proyectos</h2>
+          <MyProjects />
+        </section>
 
       </section>
 
