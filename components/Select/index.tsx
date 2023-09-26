@@ -29,7 +29,7 @@ export default function Select ({ sortBy, selected, valuesByLang }: Props) {
 
       <style jsx>{`
        .holder {
-          width: 10rem;
+          width: 8rem;
           font-size: 18px;
           background-color: ${colors.secondary};
           color: ${colors.text};

@@ -26,8 +26,6 @@ export default function Preferences ({ children }: Props) {
             right: 0;
             top: 0;
             display: flex;
-            justify-content: space-between;
-            width: 25rem;
           }
 
           h2 {

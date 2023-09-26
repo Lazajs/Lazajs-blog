@@ -9,10 +9,10 @@ export default css`
 
   div {
     display: flex;
-    gap: 5px;
+    gap: 2px;
     width: fit-content;
     justify-content: space-around;
-    margin-right: 10px;
+    margin-right: 5px;
   }
 
   a{
