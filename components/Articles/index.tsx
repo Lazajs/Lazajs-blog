@@ -3,23 +3,31 @@ import Select from 'components/Select'
 import { fonts } from 'constants/default'
 import Preferences from 'components/Preferences'
 import Post from 'components/Post'
-import useSort from 'hooks/useSort'
 import Language from 'components/Language'
+import { useMemo, useState } from 'react'
 
 type Props = {posts : PostData[]}
 
 export default function Articles ({ posts }: Props) {
-  const [postList, sortValues, sortBy] = useSort(posts)
+  const [sortBy, setSortBy] = useState(1) // 0: newest, 1: oldest
+  const sortedPosts = useMemo(()=> {
+    return posts.sort((a, b) => {
+      const dateA = new Date(a.date)
+      const dateB = new Date(b.date)
+      return sortBy ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime()
+    })
+  }, [sortBy])
+
   return (
     <section>
       <Preferences>
         <Language />
-        <Select valuesByLang={sortValues} sortBy={sortBy} />
+        <Select selected={sortBy} sortBy={setSortBy} />
       </Preferences>
 
       <div className='container'>
         {
-          postList.map((post: PostData) => (
+          sortedPosts.map((post: PostData) => (
             <Post key={post.id} data={post} />
           ))
         }

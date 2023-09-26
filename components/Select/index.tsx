@@ -1,37 +1,29 @@
 import { fonts, colors } from 'constants/default'
+import useI18n from 'hooks/useI18n'
 import React, { useEffect, useState } from 'react'
 interface Props {
-  valuesByLang: string[]
-  sortBy: (val: string)=> void
+  sortBy: (val: number)=> void,
+  selected: number
 }
 
-export default function Select ({ valuesByLang, sortBy }: Props) {
+export default function Select ({ sortBy, selected }: Props) {
   const [isActive, setActive] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const text = useI18n('articles')
+  const valuesByLang = Object.values(text)
 
-  const handleSelect = (e: React.SyntheticEvent) => {
-    const el = e.target as HTMLParagraphElement
-    const text = el.textContent
-    if (text) {
-      sortBy(text)
-      const index = valuesByLang.indexOf(text)
-      if (selectedIndex !== index) setSelectedIndex(index)
-    }
+  const handleSelect = (index: number) => {
+    sortBy(index)
   }
-
-  useEffect(() => {
-    sortBy(valuesByLang[selectedIndex])
-  }, [valuesByLang])
 
   return (
     <>
       <span className='holder' onClick={() => setActive(!isActive)}>
-        <b>{valuesByLang[selectedIndex]}</b>
+        <b>{valuesByLang[selected]}</b>
         {
           isActive
-            ? valuesByLang.map((value: string) => {
-              if (value === valuesByLang[selectedIndex]) return ''
-              return <p key={value} className='option' onClick={handleSelect}>{value}</p>
+            ? valuesByLang.map((value: string, i) => {
+              if (value === valuesByLang[selected]) return ''
+              return <p key={value} className='option' onClick={()=> handleSelect(i)}>{value}</p>
             })
             : ''
         }
