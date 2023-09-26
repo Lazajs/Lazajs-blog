@@ -5,24 +5,28 @@ import Preferences from 'components/Preferences'
 import Post from 'components/Post'
 import Language from 'components/Language'
 import { useMemo, useState } from 'react'
+import useI18n from 'hooks/useI18n'
 
 type Props = {posts : PostData[]}
 
 export default function Articles ({ posts }: Props) {
   const [sortBy, setSortBy] = useState(1) // 0: newest, 1: oldest
+  const text = useI18n('articles')
+  const valuesByLang = Object.values(text)
+  
   const sortedPosts = useMemo(()=> {
     return posts.sort((a, b) => {
       const dateA = new Date(a.date)
       const dateB = new Date(b.date)
       return sortBy ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime()
     })
-  }, [sortBy])
+  }, [sortBy, text])
 
   return (
     <section>
       <Preferences>
         <Language />
-        <Select selected={sortBy} sortBy={setSortBy} />
+        <Select valuesByLang={valuesByLang} selected={sortBy} sortBy={setSortBy} />
       </Preferences>
 
       <div className='container'>

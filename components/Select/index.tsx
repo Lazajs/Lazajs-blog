@@ -1,15 +1,13 @@
 import { fonts, colors } from 'constants/default'
-import useI18n from 'hooks/useI18n'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 interface Props {
   sortBy: (val: number)=> void,
   selected: number
+  valuesByLang: string[]
 }
 
-export default function Select ({ sortBy, selected }: Props) {
+export default function Select ({ sortBy, selected, valuesByLang }: Props) {
   const [isActive, setActive] = useState(false)
-  const text = useI18n('articles')
-  const valuesByLang = Object.values(text)
 
   const handleSelect = (index: number) => {
     sortBy(index)
