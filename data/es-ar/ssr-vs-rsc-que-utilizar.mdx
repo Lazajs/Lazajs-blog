@@ -10,7 +10,7 @@ El desarrollo web se ha conformado de una manera mucho más homogénea en los ú
 
 ## Server Side Rendering (SSR)
 
-Anteriormente, en la manera tradicional de renderizar una aplicación de React, el servidor devolvía un paquete de Javascript que se encargaba de renderizar la aplicación al ser ejecutada en el navegador. Los problemas conocidos de esta estrategia siempre fueron los mismos: SEO, rendimiento, tiempo de carga, e incluso más.
+Anteriormente, en la manera tradicional de renderizar una aplicación de React el servidor devolvía un paquete de Javascript que se encargaba de renderizar la aplicación al ser ejecutada en el navegador.
 
 <ExampleImage width={320} height={140} scaleBy={3} src={'/assets/posts/003/ssr.png'} alt='Server Side rendering' description='Server side rendering' />
 
@@ -30,8 +30,7 @@ Al momento de emitir una petición al servidor, este se encarga de crear un arbo
     response.send(html);
   });
 ```
-
-El momento previo al renderizado es el momento perfecto para realizar petición de datos, como hacer una petición a la base de datos y crear el HTML en base a ello aprovechando que ya estamos en el servidor.
+El momento previo al renderizado es el momento perfecto para realizar una petición a la base de datos y crear el HTML o enviar la información al cliente, de este modo aprovechamos la baja latencia del servidor.
 
 ### Hidratado
 
@@ -70,7 +69,7 @@ El principal responsable de una aplicación que utiliza este método es el empaq
 
 <ExampleImage width={320} height={320} scaleBy={1} src={'/assets/posts/003/rsc.png'} alt='React Server component tree' description='React Server component tree' />
 
-Existen restricciones a la hora de utilizar RSC, como por ejemplo, no pueden pasarse algunos tipos de props (explicado más adelante), y el hecho de no poder importar componentes de servidor dentro de componentes de cliente, pero si viceversa. Esto se debe a que estos componentes pueden tener datos sensibles o código que directamente no corre en el navegador.
+Existen restricciones a la hora de utilizar RSC, como no poder pasar algunos tipos de props (se explica más adelante), y no poder importar componentes de servidor en componentes de cliente. Esto se debe a que estos componentes pueden tener datos sensibles o código que no se ejecuta directamente en el navegador.
 
 Pero entonces, ¿Cómo podemos hacer que un RSC sea hijo de un componente en el cliente? Bueno, el hecho de no poder importar uno dentro del otro no implica no poder usar técnicas como la composición:
 

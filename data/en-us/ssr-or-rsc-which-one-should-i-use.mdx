@@ -1,0 +1,180 @@
+---
+title: 'SSR or RCS? Which one should I use?'
+description: 'Insight to two of most popular rendering patterns.'
+date: '2023-08-23'
+category: 'react'
+id: 003
+traduction: 'Agustina Godoy'
+---
+
+Web development has been conformed in a much more consistent way this past years, which makes the front-end formed almost parallel-y with server-side, something that was previously unthinkable. These changes resulted in new rendering patterns mostly in React.
+
+## Server Side Rendering (SSR)
+
+In the past, the traditional way of rendering a React app the server returned a blunde whose job was rendering an app when executed on website. The problems on this strategy were always the same: SEO, performance, loading time and more.
+
+<ExampleImage width={320} height={140} scaleBy={3} src={'/assets/posts/003/ssr.png'} alt='Server Side rendering' description='Server side rendering' />
+
+When talking about SSR on React, what happens is a two-way process
+
+### Rendering
+
+This happens on server. When a request is made, it creates a tree of HTML elements that the client will receive directly, without having to do it at runtime. This HTML has no interactivity, in fact, most of the time it is just a text string containing the layout of what will be seen in the browser as HTML.
+
+```js
+  import { renderToString } from 'react-dom/server';
+
+  app.use('/', (request, response) => {
+    const html = renderToString(<App />);
+    response.send(html);
+  });
+```
+
+The moment before rendering is the perfect time to make a request to the database and create the HTML or send the information to the client, thus taking advantage of the low latency of the server.
+
+### Hydration
+
+Once the HTML is received there is only one problem left: interactivity.
+
+In order to make the HTML workable by Javascript, a process called "hydration" takes place, which is nothing more than adding events, functions and the necessary interactivity (React) to the HTML.
+
+```js
+  import { hydrateRoot } from 'react-dom/client';
+
+  const domNode = document.getElementById('root');
+  const root = hydrateRoot(domNode, reactNode);
+```
+
+## React Server Components (RSC)
+
+This strategy allows the server and client to collaborate in rendering, being able to create server-only and client-only components with their respective interactivity. In simple terms, it allows both the server and client to do what they do best.
+
+### Las ventajas principales de usar un componente del servidor son:
+
+- The server has much more direct access to the information (i.e. database).
+- The server can make use of "heavy" libraries to generate a layout without the client needing to download the information on each request.
+- The client will only be in charge of rendering the interactive elements, and will already have the data or props it needs available.
+
+### Isn’t it the same as Server Side Rendering?
+
+Unlike React Server Components, the SSR does not differentiate between interactive and non-interactive components, it only simulates an environment to render the layout in a text string to avoid this step on the client.
+
+It is possible to combine these two in a complementary way, but it is necessary to understand that they are unrelated concepts.
+
+### How does an RSC actually work?
+
+The in-depth functioning of an RSC can take about three elaborate articles on the subject, but a summary insight can be created in order to understand how it works.
+
+The main responsible for an application using this method is the bundler, who is in charge from the beginning of distinguishing between server and client components.
+
+<ExampleImage width={320} height={320} scaleBy={1} src={'/assets/posts/003/rsc.png'} alt='React Server component tree' description='React Server component tree' />
+
+There are restrictions when using RSC, such as not being able to pass some types of props (explained below), and not being able to import server components into client components or vice versa. This is because these components may contain sensitive data or code that does not run directly in the browser.
+
+So, how can we make an RSC a child component of a client-side component? Well, not being able to import one into the other does not mean you cannot use techniques such as composition:
+
+```js 
+  // ClientComponent.client.jsx
+  export default function ClientComponent({ children }) {
+  return (
+  <div>
+  <h1>Hello from client land</h1>
+  {children}
+  </div>
+  )
+  }
+
+  // ServerComponent.server.jsx
+  export default function ServerComponent() {
+  return <span>Hello from server land</span>
+  }
+
+  // OuterServerComponent.server.jsx
+  // OuterServerComponent puede instanciar ambos, cliente y server
+  // components. Pasamos <ServerComponent /> como hijo al 
+  // ClientComponent.
+  import ClientComponent from './ClientComponent.client'
+  import ServerComponent from './ServerComponent.server'
+  export default function OuterServerComponent() {
+  return (
+  <ClientComponent>
+    <ServerComponent />
+  </ClientComponent>
+)
+}
+```
+
+### Life cycle of a RSC tree
+
+#### The server receives a rendering request:
+
+This is where the server creates a 'root' component which will always be an RSC and those that are or are not of the same type will descend from it.
+
+#### The server outputs the main component in a JSON:
+
+At this point a JSON tree is created with a first level corresponding to the main component, and from it the others start to descend.  When a place is found where a client component should go, a "gap" is left to be filled later in the reconstruction process.
+
+```js
+  // Elemento de React para <div>oh my</div>
+  React.createElement("div", { title: "oh my" })
+    {
+      $$typeof: Symbol(react.element),
+      type: "div",
+      props: { title: "oh my" },
+      ...
+    }
+
+  // Elemento de React para <MyComponent>oh my</MyComponent>
+  function MyComponent({children}) {
+    return <div>{children}</div>;
+  }
+
+  React.createElement(MyComponent, { children: "oh my" });
+    {
+      $$typeof: Symbol(react.element),
+      type: MyComponent  // Referencia a función MyComponent
+      props: { children: "oh my" },
+      ...
+    }
+```
+It is not a gap that is left when encountering a client component, but a space that would contain the props and a reference to the module where this component is available to be rendered and hydrated in the browser (this is where the bundler is important).
+
+```js
+  {
+  // El elemento ClientComponent representado por una referencia al módulo
+  $$typeof: Symbol(react.element),
+    type: {
+      $$typeof: Symbol(react.module.reference),
+      name: "default",
+      filename: "./src/ClientComponent.client.js"
+    },
+    props: {
+
+  // children es pasado a ClientComponent, el cual es <ServerComponent />
+  children: {
+  // ServerComponent es renderizado directamente en HTML
+  // observar como no hay referencia al ServerComponent,
+  // se renderiza directamente el 'span'.
+    $$typeof: Symbol(react.element),
+        type: "span",
+        props: {
+          children: "Hello from server land"
+        }
+      }
+    }
+  }
+```
+
+As this step requires serializing the component data as JSON, special React functions are used to perform it, but not all data can be passed as props i.e a function is not possible to serialize as JSON.
+
+#### The information is reconstructed
+
+The browser receives the JSON from the server and now starts to reconstruct the tree of components which is to be rendered in the browser. When it finds an element where the "type" refers to a module, it will be replaced with the actual client component.
+
+<ExampleImage width={320} height={320} scaleBy={2} src={'/assets/posts/003/placeholders-rsc.png'} alt='Client component' description='Client component placeholder' />
+
+## Conclusion
+
+This is a brief overview of how each of these techniques work. It is essential to understand each of them at a basic level in order to be able to think about the performance and quality of our software.
+
+It is always possible to delve much deeper into the technicalities of how they work and I highly recommend doing so in order to clear up any possible doubts that this article may have left unanswered.
