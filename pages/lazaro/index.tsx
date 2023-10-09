@@ -41,7 +41,7 @@ export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
               <a href="https://github.com/Lazajs" target='_blank'>
                 <AiFillGithub size={40} />
               </a>
-              <a href="mailto:contact@lazajs.com" title='contact@lazajs.com'>
+              <a href="mailto:lazarosanchezjs@gmail.com" title='lazarosanchezjs@gmail.com'>
                 <AiOutlineMail size={40} />
               </a>
               <a href="/assets/Curriculum.pdf" download='CV-Lazaro-Sanchez'>
