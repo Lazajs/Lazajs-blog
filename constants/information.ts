@@ -1,34 +1,32 @@
 export const EXPERIENCE = [
   {
+    name: 'Freelance',
+    from: 'Febrero 2022',
+    to: 'Presente',
+    role: ['Front-end', 'Back-end', 'Fullstack'],
+    description: 'La experiencia me proporcionó la oportunidad de enfrentar desafíos variados, perfeccionar mis habilidades técnicas y desarrollar una comprensión profunda de las necesidades y expectativas de los clientes'
+  },
+  {
     name: 'No Country',
     from: 'Abril 2023',
-    to: 'Ocasionalmente',
-    role: ['Front-end', 'Team Leader'],
-    description: 'A lo largo de tres proyectos desempeñé el rol de Front-end con equipos diferentes, desarrollando proyectos como "Awericana", "Managym" y "Wave". También estuve a cargo de dos equipos representando al cliente como Team Leader.'
-  }
+    to: 'Septiembre 2023',
+    role: ['Front-end', 'Back-end'],
+    description:  "Como desarrollador en NoCountry, me destaqué por investigar y aplicar soluciones efectivas. Mis responsabilidades incluyeron la creación de sesiones de usuario, el desarrollo de colecciones de datos y estados mantenibles, y la optimización de rendimiento. Estas tareas no solo resaltaron mi capacidad para abordar desafíos técnicos, sino también para mejorar la experiencia general del usuario"
+  },
 ]
 
 export const PROJECTS = [
   {
-    name: 'Wave (Proyecto en equipo)',
-    date: 'Septiembre 2023',
-    url: 'https://front-wave.vercel.app/',
-    description: 'Disfruta de una aplicación única donde puedes conocer personas con intereses similares y hacer nuevos amigos! Personaliza tu perfil para buscar una nueva relación y quizás encontrar al amor de tu vida con tus mismos intereses',
-    repo: 'https://github.com/No-Country/s10-17-ft-js-ts',
-    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript'],
-    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187499/Lazajs%20-%20portfolio/lfasghz3hvtfpbcvojq7.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187537/Lazajs%20-%20portfolio/lvis6wybi82dzuwyd4mm.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187548/Lazajs%20-%20portfolio/anwgwydymbxgnehfadxa.png']
+    name: 'Eyisha Zyer (Freelance)',
+    date: 'Febrero 2022',
+    url: 'https://eyishazyer.netlify.app/',
+    description: 'Web publicitaria de Eyisha Zyer.',
+    repo: '',
+    stack: ['Astro', 'Tailwind'],
+    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1706828784/Lazajs%20-%20portfolio/t0arkspsvf8od84gz3ho.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1706828783/Lazajs%20-%20portfolio/f1jbavg1s5ru5o4dycca.png']
   },
   {
-    name: 'Managym (Proyecto en equipo)',
-    date: 'Junio 2023',
-    url: 'https://managym.vercel.app/',
-    description: 'MANAGYM es una aplicación web desarrollada para apoyar en la gestión de un gimnasio. El principal enfoque de MANAGYM es apoyar en los procesos de transformación digital de los gimnasios mediante digitalización de procesos.',
-    repo: 'https://github.com/No-Country/s9-14-ft-node-react',
-    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript'],
-    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188150/Lazajs%20-%20portfolio/vqe76rvxhekwsakntg0z.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188106/Lazajs%20-%20portfolio/i0m5ykikwp2itjcsbnly.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188078/Lazajs%20-%20portfolio/vxku4ticlzg0gvqfhsrl.png']
-  },
-  {
-    name: 'Awericana (Proyecto en equipo)',
+    name: 'Awericana (NoCountry)',
     date: 'Abril 2023',
     url: 'https://awericana.vercel.app/',
     description: 'E-Commerce de compra y venta de ropa de segunda mano',
@@ -37,21 +35,39 @@ export const PROJECTS = [
     images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188540/Lazajs%20-%20portfolio/taqgnseicwbyz7m2lqcq.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188525/Lazajs%20-%20portfolio/trgd6lvv2jevd0e8fich.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188541/Lazajs%20-%20portfolio/zl0ouynryhinkhsceioo.png']
   },
   {
-    name: 'Pokefy',
-    date: 'Febrero 2023',
-    url: 'https://pokefy.vercel.app/',
-    description: 'Pokefy es un buscador de pokemones que permite visualizar información de cada uno e indexarlos! Hecho con PokeAPI.',
-    repo: 'https://github.com/Lazajs/POKEFY',
-    stack: ['React', 'Redux', 'styled-components'],
-    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695189037/Lazajs%20-%20portfolio/peey6x9nrhqjcevmlklm.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695194846/Lazajs%20-%20portfolio/nepeyncy345sc5er0v2q.png']
+    name: 'Managym (NoCountry)',
+    date: 'Junio 2023',
+    url: 'https://managym.vercel.app/',
+    description: 'MANAGYM es una aplicación web desarrollada para apoyar en la gestión de un gimnasio. El principal enfoque de MANAGYM es apoyar en los procesos de transformación digital de los gimnasios mediante digitalización de procesos.',
+    repo: 'https://github.com/No-Country/s9-14-ft-node-react',
+    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript'],
+    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188150/Lazajs%20-%20portfolio/vqe76rvxhekwsakntg0z.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188106/Lazajs%20-%20portfolio/i0m5ykikwp2itjcsbnly.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695188078/Lazajs%20-%20portfolio/vxku4ticlzg0gvqfhsrl.png']
   },
   {
-    name: 'Nopiqui',
-    date: 'Febrero 2022',
-    url: 'https://nopiqui.onrender.com/',
-    description: 'Crea tus notas personalizadas y compártelas con tus amigos! Con un editor de texto enriquecido y la posibilidad de archivar tus notas para que dejen de ser visibles.',
-    repo: 'https://github.com/Lazajs/Nopiqui',
-    stack: ['React', 'SASS', 'Typescript', 'Express', 'MongoDB', 'DraftJS'],
-    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695189035/Lazajs%20-%20portfolio/ka34b4kkgdra8kojycmz.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695189033/Lazajs%20-%20portfolio/yr1dkeubu2rjuihxm7jv.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695194894/Lazajs%20-%20portfolio/j86kmpzzjqc35dpgtuez.png']
+    name: 'Buenos Aires Explora (NoCountry)',
+    date: 'Agosto 2023',
+    url: 'https://baexplora.vercel.app/',
+    description: 'Aplicación turística, encuentra las mejores actividades disponibles en la ciudad de Buenos Aires y vive la experiencia al máximo.',
+    repo: 'https://github.com/No-Country/s11-08-ft-node-react',
+    stack: ['Nodejs', 'Express', 'Swagger', 'React', 'Nextjs', 'SASS'],
+    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1706829628/Lazajs%20-%20portfolio/wgaeg5ixtff4fse34bgn.jpg', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1706829632/Lazajs%20-%20portfolio/zifd9bkdkvfnybpuw5oj.png']
+  },
+  {
+    name: 'Wave (NoCountry)',
+    date: 'Septiembre 2023',
+    url: 'https://front-wave.vercel.app/',
+    description: 'Disfruta de una aplicación única donde puedes conocer personas con intereses similares y hacer nuevos amigos! Personaliza tu perfil para buscar una nueva relación y quizás encontrar al amor de tu vida con tus mismos intereses',
+    repo: 'https://github.com/No-Country/s10-17-ft-js-ts',
+    stack: ['NextJS', 'SASS', 'Zustand', 'Typescript'],
+    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187499/Lazajs%20-%20portfolio/lfasghz3hvtfpbcvojq7.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187537/Lazajs%20-%20portfolio/lvis6wybi82dzuwyd4mm.png', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1695187548/Lazajs%20-%20portfolio/anwgwydymbxgnehfadxa.png']
+  },
+  {
+    name: 'Farmavet (Freelance)',
+    date: 'Enero 2024',
+    url: 'https://farmavet.vercel.app/',
+    description: 'E-commerce de venta de fármacos y herramientas veterinarias.',
+    repo: '',
+    stack: ['Nextjs', 'Tailwind', 'Nodejs'],
+    images: ['https://res.cloudinary.com/dfdgsotzz/image/upload/v1706829628/Lazajs%20-%20portfolio/fnzeuyxhilc4lpfu9bxo.jpg', 'https://res.cloudinary.com/dfdgsotzz/image/upload/v1706829627/Lazajs%20-%20portfolio/mhalqicyjgiakwwr8seh.jpg']
   }
 ]
