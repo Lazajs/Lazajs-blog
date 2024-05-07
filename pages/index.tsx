@@ -26,6 +26,12 @@ export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
         <meta name="description" content="Lazaro Sanchez - Web developer, passionate about Frontend and Python" />
       </Head>
 
+      <section className='newnav'>
+        <a href="https://blog.lazajs.site" target='_blank'>
+          <img src="/logo-short-react.svg" alt="" />
+        </a>
+      </section>
+
       <section className='container'>
         <header>
           <div className="me">
@@ -57,6 +63,7 @@ export default function Lazaro ({opinions}: {opinions: IOpinion[]}) {
              Me entusiasma la <H>optimización de rendimiento</H> y la implementación de sólidas <H>arquitecturas</H> web.
           </p>
         </div>
+
 
         <AnimatedElements>
           <MyStack />

@@ -2,6 +2,17 @@ import css from 'styled-jsx/css'
 import { colors } from 'constants/default'
 
 export default css`
+  .newnav {
+    display: block;
+    width: fit-content;
+    height: 100px;
+    margin: 16px auto -16px auto;
+  }
+
+  .newnav img {
+    width: 100px;
+  }
+
   .container {
     margin-top: 4rem;
     min-height: 100vh;
